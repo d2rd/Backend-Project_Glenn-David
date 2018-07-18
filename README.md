@@ -1,3 +1,9 @@
+##Project URLs##
+  **Repo**
+    `https://github.com/d2rd/Backend-Project_Glenn-David.git`
+  **Trello**
+    `https://trello.com/b/AIWpw5TW/lambda-notesbackend-glenn-david`
+
 # Back End Project Week
 This week you will be building a backend for a note taking app called "Lambda Notes."
 
