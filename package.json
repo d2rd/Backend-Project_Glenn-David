@@ -1,0 +1,26 @@
+{
+  "name": "Backend-Project_Server",
+  "version": "0.0.1",
+  "description": "LambdaSchool CSPT1 Back-End Project Week Server",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/d2rd/Backend-Project_Glenn-David.git"
+  },
+  "keywords": [],
+  "author": "Glenn-David with other code",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.3",
+    "express": "^4.15.2"
+  },
+  "devDependencies": {
+    "jest": "^23.1.0",
+    "morgan": "^1.9.0",
+    "supertest": "^3.1.0"
+  },
+  "scripts": {
+    "test": "jest --watch --verbose",
+    "start": "nodemon server.js"
+  }
+}
