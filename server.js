@@ -1,9 +1,20 @@
 const express = require('express');
-const bodyParser = require('body-parser');
+const helmet = require('helmet');
+const mongoose = require('mongoose');
 const cors = require('cors');
 const port = 5500;
 const app = express();
 
+connect to database
+
+mongoose.connect('mongodb://localhost/d2rdNotes') // if 'databaseName' does not exist mongoDB will create it.  However it will not show up until the first record is created.
+
+// create schema
+// ☞ 8cf866c9-a061-48df-a275-ebdbf2196f60
+
+const ObjectId = mongoose.Schema.Types.ObjectId
+
+// REFACTOR TO MOVE NOTES TO MONGODB
 // REFACTOR  to remove 'Summary' field because it is created on the fly in 'Notes.js'
 let notes = [
   {
