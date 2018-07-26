@@ -2,7 +2,10 @@
   `https://trello.com/b/AIWpw5TW/lambda-notesbackend-glenn-david`
 
 **SERVER**
-    **mongodb mlab**
+**heroku**
+    `https://d2rd-notes-heroku.herokuapp.com/ | https://git.heroku.com/d2rd-notes-heroku.git`
+    
+**mongodb mlab**
     `ds141611/d2rd-notes`
     **mongo shell connection**
     //  mongo ds01234.mlab.com:56789/mydb -u <dbuser> -p <dbpassword>
@@ -10,7 +13,7 @@
 
 **MongoDB URI connection**
 // To connect using a driver via the standard MongoDB URI:
-// 'mongodb: //<dbuser>:<dbpassword>@ds012345.mlab.com:5678/mydb'
+// 'mongodb://<dbuser>:<dbpassword>@ds012345.mlab.com:5678/mydb'
     `mongodb://d2rd:d2rd-PW@ds141611.mlab.com:41611/d2rd-notes`
 
 
@@ -18,6 +21,11 @@
     `https://d2rd-notes.herokuapp.com/`
     | `https://git.heroku.com/d2rd-notes.git`
     
+**CLIENT**
+    **local**
+        d2rd-Notes
+            `https://github.com/d2rd/d2rd-notes.git`
+
 **netlify Settings for d2rdNotes**
     `netlify: https://d2rdNotes.netlify.com`
     original domain: inspiring-kirch-18446e.netlify.com
@@ -44,7 +52,3 @@ API ID
         access at the following location:
 
 `https://nam01.safelinks.protection.outlook.com/?url=https%3A%2F%2Fgithub.com%2Fd2rd%2FBackend-Project_Glenn-David%2Fsettings%2Fkeys&data=02%7C01%7C%7C68644793071648b516ab08d5ec7f0ca5%7C84df9e7fe9f640afb435aaaaaaaaaaaa%7C1%7C0%7C636674952766371207&sdata=rpbxPZNAAGONQhuLuKKsgunku%2BYzuH6%2BEg08MNYJGns%3D&reserved=0`
-
-**CLIENT**
-    d2rd-Notes
-        `https://github.com/d2rd/d2rd-notes.git`
