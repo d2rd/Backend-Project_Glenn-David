@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 const port = 5000;
 const server = express();
+const ElectricUpright = require('./models/ElectricUpright')
 
 // connect to database
 const options = {
@@ -35,6 +36,13 @@ server.get('/', (req, res) => {
   res.send('Hello from the express server'); // sanity check
 });
 
+server.get('/ElectricUprights', (req, res) => {
+  ElectricUpright.find()
+    .then((data) => {
+      res.json(data)
+    })
+    .catch(err => console.log(err.message))
+})
 // server.post('/api/d2rdNotes/create', (req, res) => {
 //   ++id;
 //   const { title, summary, body, priority } = req.body;
