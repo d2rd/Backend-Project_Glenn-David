@@ -54,7 +54,7 @@ server.post('/ElectricUprights/create', (req, res) => {
     })
     .catch(err => console.log(err))
 });
-
+// METHOD 1 req.body
 // server.put('/ElectricUprights/update/', (req, res) => {
 //   console.log(req.body)
 //   ElectricUpright.findByIdAndUpdate(req.body._id, {price: req.body.price, itemURL: req.body.itemURL})
@@ -63,24 +63,51 @@ server.post('/ElectricUprights/create', (req, res) => {
 //     })
 //     .catch(err => console.log(err))
 // })
-// METHOD 2
+// METHOD 2 req.params
 server.put('/ElectricUprights/update/:id', (req, res) => {
   console.log(req.params.id)
-  ElectricUpright.findByIdAndUpdate(req.params.id, {price: req.body.price, itemURL: req.body.itemURL})
+  ElectricUpright
+  .findByIdAndUpdate(req.params.id, {price: req.body.price, itemURL: req.body.itemURL})
     .then(note => {
       res.status(201).json(note)
     })
     .catch(err => console.log(err))
 })
-// server.delete('/d2rdNotes/delete', (req, res) => {
-//   const id = req.body.id;
+
+server.delete('/ElectricUprights/delete/:id', deleteFunc)
+
+function deleteFunc (req, res) {
+  console.log(req.params.id);
+  ElectricUpright
+    .findByIdAndRemove(req.params.id)
+    .then(note => {
+      res.send('The note was deleted')
+    })
+    .catch(err => console.log(err));
+};
+
+// ADDING MIDDLEWARE
+// server.delete('/ElectricUprights/update/:id', authorizeUserMiddleware, deleteFunc)
+
+// function deleteFunc (req, res) {
+//   console.log(req.params.id);
+//   ElectricUpright
+//     .findByIdAndRemove(req.params.id)
+//     .then(note => {
+//       res.status(201).json(note)
+//     })
+//     .catch(err => console.log(err));
+// };
+
+// server.delete('/ElectricUprights/update/:id', (req, res) => {
+//   console.log(req.params.id)
+//   ElectricUpright.findByIdAndRemove(req.params.id);
 //   const newNotes = d2rdNotes.filter(note => {
 //     return id !== note.id;
 //   });
 //   d2rdNotes = newNotes;
 //   res.send(d2rdNotes);
 // });
-
 // **** OTHER COLLECTIONS ***
 // server.get('/SpeakerCabinets', (req, res) => {
 //   SpeakerCabinets.find()
