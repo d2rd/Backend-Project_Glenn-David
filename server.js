@@ -36,7 +36,7 @@ server.get('/', (req, res) => {
   res.send('Hello from the express server'); // sanity check
 });
 
-server.get('/ElectricUpright', (req, res) => {
+server.get('/ElectricUprights', (req, res) => {
   ElectricUpright.find()
     .then((data) => {
       res.json(data)
@@ -46,7 +46,7 @@ server.get('/ElectricUpright', (req, res) => {
 
 server.post('/ElectricUprights/create', (req, res) => {
   const { title, priority, body, price, itemURL, reviewURL } = req.body;
-  const myNote = { title, priority, body, itemURL, reviewURL };
+  const myNote = { title, priority, body, price, itemURL, reviewURL };
   const newNote = new ElectricUpright(myNote)
   newNote.save()
     .then(note => {
@@ -55,16 +55,23 @@ server.post('/ElectricUprights/create', (req, res) => {
     .catch(err => console.log(err))
 });
 
-// server.put('/d2rdNotes/update/:id', (req, res) => {
-//   const { title, priority, summary, body } = req.body;
-//   const updatedNote = { title, priority, summary, body };
-//   const newNotes = d2rdNotes.map(note => {
-//     return (note.id == req.params.id ? updatedNote :note);
-//   });
-//   d2rdNotes = newNotes;
-//   res.send(d2rdNotes);
-// });
-
+// server.put('/ElectricUprights/update/', (req, res) => {
+//   console.log(req.body)
+//   ElectricUpright.findByIdAndUpdate(req.body._id, {price: req.body.price, itemURL: req.body.itemURL})
+//     .then(note => {
+//       res.status(201).json(note)
+//     })
+//     .catch(err => console.log(err))
+// })
+// METHOD 2
+server.put('/ElectricUprights/update/:id', (req, res) => {
+  console.log(req.params.id)
+  ElectricUpright.findByIdAndUpdate(req.params.id, {price: req.body.price, itemURL: req.body.itemURL})
+    .then(note => {
+      res.status(201).json(note)
+    })
+    .catch(err => console.log(err))
+})
 // server.delete('/d2rdNotes/delete', (req, res) => {
 //   const id = req.body.id;
 //   const newNotes = d2rdNotes.filter(note => {

@@ -11,7 +11,7 @@ const ElectricUpright = mongoose.Schema({
   articles: [{type: ObjectId, ref: 'Article'}]
 },
 {
-  collection: 'ElectricUpright'
+  collection: 'ElectricUprights'
 })
 
 module.exports = mongoose.model('ElectricUpright', ElectricUpright)
