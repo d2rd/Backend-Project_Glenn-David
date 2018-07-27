@@ -5,6 +5,8 @@ const cors = require('cors');
 const port = 5000;
 const server = express();
 const ElectricUpright = require('./models/ElectricUpright')
+// const SpeakerCabinets = require('./models/SpeakerCabinets')
+// const misc = require('./models/misc')
 
 // connect to database
 const options = {
@@ -12,46 +14,48 @@ const options = {
   pass:"d2rd-PW",
   useNewUrlParser: true // use the urlParser instead of the old one
 }
+// ☞ bd397750-457f-4308-b616-f0424ddc5d04
+
 mongoose.connect('mongodb://ds141611.mlab.com:41611/d2rd-notes', options)
-.then(() => console.log('Success connecting the mlab'))
-.catch((err) => console.log(err.message)) // changing PW would throw 'authentication failed error
+.then(() => console.log('Success connecting the MongoDB/d2rd-notes on mlab'))
+.catch((err) => console.log(err.message)) // TEST: changing PW should throw 'authentication failed error
 
 // create schema
 // ☞ 8cf866c9-a061-48df-a275-ebdbf2196f60
-
-// const ObjectId = mongoose.Schema.Types.ObjectId
-
 // REFACTORED TO MOVE NOTES TO MONGODB
-// mongoDB connnection string:      `mongodb://d2rd:d2rd-PW@ds141611.mlab.com:41611/d2rd-d2rdNotes`
 
 server.use(express.json()) // bodyParser function for json payloads
 
 server.use(helmet())
 server.use(cors()); // ie between netlify, heroku and mlab
 
-// const memCache ={};  
-//add logic for server.get
+// const memCache ={}; 
 
+//add CRUD routes
 server.get('/', (req, res) => {
   res.send('Hello from the express server'); // sanity check
 });
 
-server.get('/ElectricUprights', (req, res) => {
+server.get('/ElectricUpright', (req, res) => {
   ElectricUpright.find()
     .then((data) => {
       res.json(data)
     })
     .catch(err => console.log(err.message))
 })
-// server.post('/api/d2rdNotes/create', (req, res) => {
-//   ++id;
-//   const { title, summary, body, priority } = req.body;
-//   const myNote = { id, title, summary, body, priority };
-//   d2rdNotes.push(myNote);
-//   res.send(d2rdNotes);
-// });
 
-// server.put('/api/d2rdNotes/update/:id', (req, res) => {
+server.post('/ElectricUprights/create', (req, res) => {
+  const { title, priority, body, price, itemURL, reviewURL } = req.body;
+  const myNote = { title, priority, body, itemURL, reviewURL };
+  const newNote = new ElectricUpright(myNote)
+  newNote.save()
+    .then(note => {
+      res.status(201).json(note)
+    })
+    .catch(err => console.log(err))
+});
+
+// server.put('/d2rdNotes/update/:id', (req, res) => {
 //   const { title, priority, summary, body } = req.body;
 //   const updatedNote = { title, priority, summary, body };
 //   const newNotes = d2rdNotes.map(note => {
@@ -61,7 +65,7 @@ server.get('/ElectricUprights', (req, res) => {
 //   res.send(d2rdNotes);
 // });
 
-// server.delete('/api/d2rdNotes/delete', (req, res) => {
+// server.delete('/d2rdNotes/delete', (req, res) => {
 //   const id = req.body.id;
 //   const newNotes = d2rdNotes.filter(note => {
 //     return id !== note.id;
@@ -69,6 +73,24 @@ server.get('/ElectricUprights', (req, res) => {
 //   d2rdNotes = newNotes;
 //   res.send(d2rdNotes);
 // });
+
+// **** OTHER COLLECTIONS ***
+// server.get('/SpeakerCabinets', (req, res) => {
+//   SpeakerCabinets.find()
+//     .then((data) => {
+//       res.json(data)
+//     })
+//     .catch(err => console.log(err.message))
+// })
+
+// server.get('/misc', (req, res) => {
+//   misc.find()
+//     .then((data) => {
+//       res.json(data)
+//     })
+//     .catch(err => console.log(err.message))
+// })
+
 
 server.listen(port, () => {
   console.log(`server listening on port ${port}`);

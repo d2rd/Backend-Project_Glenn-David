@@ -4,7 +4,7 @@ const Misc = mongoose.Schema({
   title: {type: String, required: true},
   priority: {type: Number, required: true},
   body: {type: String, required: true},
-  urlAddress: String,
+  itemURL: String,
   reviewURL: String
 }, {
   collection: 'Misc'

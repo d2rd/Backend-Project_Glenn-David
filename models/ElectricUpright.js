@@ -1,16 +1,16 @@
 const mongoose = require('mongoose')
-// const ObjectId = mongoose.Schema.Types.ObjectId
+const ObjectId = mongoose.Schema.Types.ObjectId
 
 const ElectricUpright = mongoose.Schema({
   title: {type: String, required: true},
   priority: {type: Number, required: true},
+  price: Number,
   body: {type: String, required: true},
-  urlAddress: String,
-  reviewURL: String
-  // collectionName: {
-  //   type: ObjectId,
-  //   ref: 'BassGear'}
-}, {
+  itemURL: String,
+  reviewURL: String,
+  articles: [{type: ObjectId, ref: 'Article'}]
+},
+{
   collection: 'ElectricUpright'
 })
 

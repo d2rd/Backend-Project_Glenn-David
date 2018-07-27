@@ -38,7 +38,7 @@ app.get('./d2rdNotes/get', (req, res) => {
   res.send(d2rdNotes);
 });
 
-app.post('/api/d2rdNotes/create', (req, res) => {
+app.post('/d2rdNotes/create', (req, res) => {
   ++id;
   const { title, summary, body, priority } = req.body;
   const myNote = { id, title, summary, body, priority };
@@ -46,7 +46,7 @@ app.post('/api/d2rdNotes/create', (req, res) => {
   res.send(d2rdNotes);
 });
 
-app.put('/api/d2rdNotes/update/:id', (req, res) => {
+app.put('/d2rdNotes/update/:id', (req, res) => {
   const { title, priority, summary, body } = req.body;
   const updatedNote = { title, priority, summary, body };
   const newNotes = d2rdNotes.map(note => {
@@ -56,7 +56,7 @@ app.put('/api/d2rdNotes/update/:id', (req, res) => {
   res.send(d2rdNotes);
 });
 
-app.delete('/api/d2rdNotes/delete', (req, res) => {
+app.delete('/d2rdNotes/delete', (req, res) => {
   const id = req.body.id;
   const newNotes = d2rdNotes.filter(note => {
     return id !== note.id;

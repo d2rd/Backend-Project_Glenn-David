@@ -3,8 +3,9 @@ const mongoose = require('mongoose')
 const SpeakerCabinets = mongoose.Schema({
   title: {type: String, required: true},
   priority: {type: Number, required: true},
+  price: Number,
   body: {type: String, required: true},
-  urlAddress: String,
+  itemURL: String,
   reviewURL: String
 }, {
   collection: 'SpeakerCabinets'

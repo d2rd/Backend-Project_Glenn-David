@@ -3,7 +3,8 @@
 
 **SERVER**
 **heroku**
-    `https://d2rd-notes-heroku.herokuapp.com/ | https://git.heroku.com/d2rd-notes-heroku.git`
+   connection to app `https://d2rd-notes-heroku.herokuapp.com/`
+ push from local to heroku `https://git.heroku.com/d2rd-notes-heroku.git`
     
 **mongodb mlab**
     `ds141611/d2rd-notes`
