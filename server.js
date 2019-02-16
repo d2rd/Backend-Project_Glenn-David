@@ -6,7 +6,8 @@ const port = 5000;
 const server = express();
 const ElectricUpright = require('./models/ElectricUpright')
 // const SpeakerCabinets = require('./models/SpeakerCabinets')
-// const misc = require('./models/misc')
+// const Misc = require('./models/Misc')
+// const NoteItem = require('./models/NoteItem')
 
 // connect to database
 const options = {
@@ -67,7 +68,7 @@ server.post('/ElectricUprights/create', (req, res) => {
 server.put('/ElectricUprights/update/:id', (req, res) => {
   console.log(req.params.id)
   ElectricUpright
-  .findByIdAndUpdate(req.params.id, {price: req.body.price, itemURL: req.body.itemURL})
+    .findByIdAndUpdate(req.params.id, {price: req.body.price, itemURL: req.body.itemURL})
     .then(note => {
       res.status(201).json(note)
     })
