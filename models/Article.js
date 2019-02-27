@@ -9,7 +9,7 @@ const Article = mongoose.Schema({
     type: ObjectId,
     ref: ''}
 }, {
-  collection: 'ElectricUpright'
+  collection: 'ElectricUprights'
 })
 
 module.exports = mongoose.model('Article', Article)
