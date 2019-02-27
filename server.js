@@ -2,8 +2,9 @@ const express = require('express');
 const helmet = require('helmet');
 const mongoose = require('mongoose');
 const cors = require('cors');
-const port = 5000;
+const port = 5501;
 const server = express();
+
 const ElectricUpright = require('./models/ElectricUpright')
 // const SpeakerCabinets = require('./models/SpeakerCabinets')
 // const Misc = require('./models/Misc')
@@ -28,13 +29,24 @@ mongoose.connect('mongodb://ds141611.mlab.com:41611/d2rd-notes', options)
 server.use(express.json()) // bodyParser function for json payloads
 
 server.use(helmet())
-server.use(cors()); // ie between netlify, heroku and mlab
+// server.use(cors()); 
+// Allow Cross-origin Resource Sharing i.e. between netlify, heroku and mlab
+// server.use(cors());
+server.use((req, res, next) =>{
+  res.header("Access-Control-Allow-Origin", "*");  //`*` allows all sites to make requests.  change to specific domains to restrict access.
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
+  if (req.method === 'OPTIONS') {
+    res.header('Access-Control-Allow-Methods', 'PUT, POST, PATCH,DELETE, GET')
+    return res.status(200).json({})
+  }
+  next();  // allows other routes to take over.
+})
 
 // const memCache ={}; 
 
 //add CRUD routes
 server.get('/', (req, res) => {
-  res.send('Hello from the express server'); // sanity check
+  res.send('Hello from the d2rd Notes back-end express server'); // sanity check
 });
 
 server.get('/ElectricUprights', (req, res) => {
