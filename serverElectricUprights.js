@@ -1,15 +1,20 @@
-// using mLab/d2rd/d2rd-Notes db/ ElectricUprights collection
+// using mLab/d2rd/d2rd-Notes db.collection(ElectricUprights)
 const express = require('express');
 const helmet = require('helmet');
 const mongoose = require('mongoose');
+// const Schema = mongoose.Schema;
 const cors = require('cors');
 const port = 5501;
 const server = express();
 
+// Define available models
 const ElectricUpright = require('./models/ElectricUpright')
-// const SpeakerCabinets = require('./models/SpeakerCabinets')
-// const Misc = require('./models/Misc')
-// const NoteItem = require('./models/NoteItem')
+
+// define available databases
+const mLabD2rdNotes = 'mongodb://ds141611.mlab.com:41611/d2rd-notes';
+
+// Set active database
+const activeDB = mLabD2rdNotes; // avoids hardcoding db into mongoose.connect line 27
 
 // connect to database
 const options = {
@@ -19,7 +24,7 @@ const options = {
 }
 // ☞ bd397750-457f-4308-b616-f0424ddc5d04
 
-mongoose.connect('mongodb://ds141611.mlab.com:41611/d2rd-notes', options)
+mongoose.connect(activeDB, options)
 .then(() => console.log('Success connecting the MongoDB/d2rd-notes on mlab'))
 .catch((err) => console.log(err.message)) // TEST: changing PW should throw 'authentication failed error
 

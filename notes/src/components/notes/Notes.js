@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './Notes.css';
 const url = 'http://localhost:5501/notes'
+// const notesCollection2 = 'http://localhost:5501/notesCollection2'
 
 class Notes extends Component {
   constructor() {

@@ -1,11 +1,17 @@
+// using mLab/d2rd/notes db.collection(notes)
 const express = require('express');
 const helmet = require('helmet');
 const mongoose = require('mongoose');
+// const Schema = mongoose.Schema;
 const cors = require('cors');
 const port = 5501;
 const server = express();
 
+// Define available models
 const Note = require('./models/Note')
+
+//Define available databases
+const mLabNotes = 'mongodb://ds149742.mlab.com:49742/notes';
 
 // connect to database
 const options = {
@@ -15,13 +21,14 @@ const options = {
 }
 // ☞ bd397750-457f-4308-b616-f0424ddc5d04
 
-mongoose.connect('mongodb://ds149742.mlab.com:49742/notes', options)
+mongoose.connect(mLabNotes, options)
 .then(() => console.log('Success connecting the MongoDB/notes on mlab'))
 .catch((err) => console.log(err.message)) // TEST: changing PW should throw 'authentication failed error
-
+// NOTE: EACH DB HAS A UNIQUE CONNECTION STRING
 // create schema
 // ☞ 8cf866c9-a061-48df-a275-ebdbf2196f60
 // REFACTORED TO MOVE NOTES TO MONGODB
+
 
 server.use(express.json()) // bodyParser function for json payloads
 
@@ -84,8 +91,6 @@ function deleteFunc (req, res) {
     })
     .catch(err => console.log(err));
 };
-
-
 
 server.listen(port, () => {
   console.log(`server listening on port ${port}`);
