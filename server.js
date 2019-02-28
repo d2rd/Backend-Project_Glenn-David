@@ -2,6 +2,7 @@
 const express = require('express');
 const helmet = require('helmet');
 const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
 const cors = require('cors');
 const port = 5501;
 const server = express();

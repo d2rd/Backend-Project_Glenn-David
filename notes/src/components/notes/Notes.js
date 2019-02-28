@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './Notes.css';
+const url = 'http://localhost:5501/notes'
 
 class Notes extends Component {
   constructor() {
@@ -10,7 +11,7 @@ class Notes extends Component {
   }
 
   componentDidMount() {
-    fetch('/api/notes')
+    fetch(url) // Call the fetch function passing the url of the API as a parameter
       .then(res => res.json())
       .then(notes => this.setState({notes}, () => console.log('Notes fetched...', notes)
         ))
