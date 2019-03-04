@@ -10,7 +10,7 @@ const server = express();
 // Define available models
 const Note = require('./models/Note')
 
-//Define available databases
+//Define available databases and their connection strings
 const mLabNotes = 'mongodb://ds149742.mlab.com:49742/notes';
 
 // Set active database

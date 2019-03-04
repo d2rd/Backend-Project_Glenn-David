@@ -24,7 +24,8 @@
   },
   "scripts": {
     "test": "jest --watch --verbose",
-    "start": "nodemon server.js",
+    "start": "node  server.js",
+    "server": "nodemon server.js",
     "electricUprights": "nodemon serverElectricUprights.js"
     }
   }

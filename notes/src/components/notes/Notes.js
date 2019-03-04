@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './Notes.css';
 const url = 'http://localhost:5501/notes'
-// const notesCollection2 = 'http://localhost:5501/notesCollection2'
+// const notes = 'http://localhost:5501/notes'
 
 class Notes extends Component {
   constructor() {
@@ -26,7 +26,14 @@ class Notes extends Component {
         <h2>Notes</h2>
         <ul>
         {this.state.notes.map(note =>
-            <li key={note.id}>{ note.title } { note.body }</li>  
+            <li key={note.id}>{ note.title }
+            <p>Priority: {note.priority}</p> 
+            { note.body }
+            <p></p> 
+            <a href={ note.urlAddress }>View product</a>  |    
+              <a href={ note.reviewURL }>Read review</a>
+            
+            </li>  
           )}
         </ul>
       </div>
