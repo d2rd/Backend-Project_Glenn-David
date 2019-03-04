@@ -10,6 +10,8 @@ const ElectricUpright = mongoose.Schema({
   body: {type: String, required: true},
   itemURL: String,
   reviewURL: String,
+  audioFileURL: String,
+  imageURL: String,
   articles: [{type: ObjectId, ref: 'Article'}]
 },
 {

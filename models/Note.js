@@ -6,10 +6,14 @@ const Schema = mongoose.Schema;
       type: String,
       required: true
     },
-    body: {
-      type: String, 
-      required: true
-    },
+    priority: {type: Number, required: true},
+    price: Number,
+    body: {type: String,required: true},
+    itemURL: String,
+    reviewURL: String,
+    audioFileURL: String,
+    imageURL: String,
+    // articles: [{type: ObjectId, ref: 'Article'}]
   },
     {
       collection: ''

@@ -31,7 +31,8 @@ class Notes extends Component {
             { note.body }
             <p></p> 
             <a href={ note.urlAddress }>View product</a>  |    
-              <a href={ note.reviewURL }>Read review</a>
+              <a href={ note.reviewURL }>Read review</a>  |    
+              <a href={ note.audioFileURL }>Play audio</a>
             
             </li>  
           )}
