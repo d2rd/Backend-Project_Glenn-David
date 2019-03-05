@@ -12,3 +12,10 @@ li {
 
   text-align: left;
 }
+
+.Title {
+  text-align: start;
+}
+.Priority {
+  text-align: end;
+}
