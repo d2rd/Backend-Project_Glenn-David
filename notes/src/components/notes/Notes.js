@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './Notes.css';
+// import logo from '../src/assets/D2rdroid2.png';  //move to ./assets folder
 const url = 'http://localhost:5501/notes'
 // const notes = 'http://localhost:5501/notes'
 
