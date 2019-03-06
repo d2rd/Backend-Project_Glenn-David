@@ -25,26 +25,26 @@ class Notes extends Component {
     return (
       <div>
         <div className="View-header">
-        <h1>Notes Found</h1>
+        <h1>Notes found about Electric Uprights</h1>
         </div>
         <div className="PanelContainer">
           <div className="Nav-panel">
           <div>
               <button className="btn-NavButton" onClick={() => this.props.getNotes}>View All Notes</button>
-              {/* <button className="btn-NavButton" onClick={() => { alert("hey david")}}>View Your Notes</button> */}
+              {/* <button className="btn-NavButton" onClick={() => { alert("hey david this button works!")}}>View Your Notes</button> */}
             </div>
           <div>
-              <button className="btn-NavButton" onClick={() => this.props.getNotes}>View Selected Note</button>
+              <button className="btn-NavButton" onClick={() => this.props.showSelectedNote}>View Selected Note</button>
               {/* <button className="btn-NavButton" onClick={() => { alert("hey david")}}>View Your Notes</button> */}
             </div>
             <div>
-              <button className="btn-NavButton">Search Notes</button>
+              <button className="btn-NavButton" onClick={() => this.props.searchNotes}>Search Notes</button>
             </div>
             <div>
               <button className="btn-NavButton" onClick={() => this.props.createNote}>Create New Note</button>
             </div>
             <div>
-              <button className="btn-NavButton" onClick={() => this.props.createNote}>Delete a Note</button>
+              <button className="btn-NavButton" onClick={() => this.props.deleteNote}>Delete a Note</button>
             </div>
           
           </div>
@@ -58,7 +58,7 @@ class Notes extends Component {
                 { note.body }
                 <p></p> 
                 <a href={ note.urlAddress }>View product</a>  |    
-                  <a href={ note.reviewURL }> Read review</a>  |    
+                  <a href={ note.reviewURL }> Read reviews</a>  |    
                   <a href={ note.audioFileURL }>  Play audio</a>
                 
                 </li>  
