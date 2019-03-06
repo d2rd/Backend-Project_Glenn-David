@@ -24,22 +24,31 @@ class Notes extends Component {
   render() {
     return (
       <div>
+        <div className="View-header">
         <h1>Notes Found</h1>
-        <ul>
-        {this.state.notes.map(note =>
-            <li key={note.id}>
-            <div className="Title">
-            <h3>{ note.title }</h3><div className="Priority">Priority: {note.priority}</div> 
-            </div>
-            { note.body }
-            <p></p> 
-            <a href={ note.urlAddress }>View product</a>  |    
-              <a href={ note.reviewURL }> Read review</a>  |    
-              <a href={ note.audioFileURL }>  Play audio</a>
-            
-            </li>  
-          )}
-        </ul>
+        </div>
+        <div className="PanelContainer">
+          <div className="Nav-panel">
+          </div>
+          <div className="Notes-panel">
+            <ul>
+            {this.state.notes.map(note =>
+                <li key={note.id}>
+                <div className="Title">
+                <h3>{ note.title }</h3><div className="Priority">Priority: {note.priority}</div> 
+                </div>
+                { note.body }
+                <p></p> 
+                <a href={ note.urlAddress }>View product</a>  |    
+                  <a href={ note.reviewURL }> Read review</a>  |    
+                  <a href={ note.audioFileURL }>  Play audio</a>
+                
+                </li>  
+              )}
+            </ul>
+
+          </div>
+        </div>
       </div>
     );
   }
