@@ -29,6 +29,24 @@ class Notes extends Component {
         </div>
         <div className="PanelContainer">
           <div className="Nav-panel">
+          <div>
+              <button className="btn-NavButton" onClick={() => this.props.getNotes}>View All Notes</button>
+              {/* <button className="btn-NavButton" onClick={() => { alert("hey david")}}>View Your Notes</button> */}
+            </div>
+          <div>
+              <button className="btn-NavButton" onClick={() => this.props.getNotes}>View Selected Note</button>
+              {/* <button className="btn-NavButton" onClick={() => { alert("hey david")}}>View Your Notes</button> */}
+            </div>
+            <div>
+              <button className="btn-NavButton">Search Notes</button>
+            </div>
+            <div>
+              <button className="btn-NavButton" onClick={() => this.props.createNote}>Create New Note</button>
+            </div>
+            <div>
+              <button className="btn-NavButton" onClick={() => this.props.createNote}>Delete a Note</button>
+            </div>
+          
           </div>
           <div className="Notes-panel">
             <ul>
