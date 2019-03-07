@@ -20,11 +20,14 @@ class Notes extends Component {
         .catch(error => {
           console.error('Error fetching notes from mLab:', error);
         })
-  }
-  removeNoteN(id) {
+  }//find how to load everything to props ala Frank Faustino video
+
+  removeNote(id) {
     this.setState({notes: this.state.notes.filter(note => note.id !== id)})
-  }
+  }  //adapted from video https://youtu.be/KItsR6pM5lY
+
   render() {
+    let {id, title, priority, urlAddress,reviewURL,audioFileURL} = this.props.note;
     return (
       <div>
         <div className="View-header">
@@ -63,7 +66,7 @@ class Notes extends Component {
                 <a href={ note.urlAddress }>View product</a>  |    
                   <a href={ note.reviewURL }> Read reviews</a>  |    
                   <a href={ note.audioFileURL }>  Play audio</a>
-                  {/* <Button color="danger" onClick={()=> this.props.removeNote(id)}>x</Button> */}
+                  <button color="danger" onClick={()=> this.props.removeNote(id)}>x</button>
                 
                 </li>  
               )}
