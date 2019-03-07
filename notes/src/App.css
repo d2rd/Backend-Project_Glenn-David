@@ -278,7 +278,18 @@ body {
   font-weight: bold;
   font-size: 14pt;
 }
-
+.btn-itemDelete{
+  display: flex;
+  direction: row;
+  justify-content: flex-end;
+  align-content: flex-end;
+  /* vertical-align: middle; */
+  align-items: flex-end;
+  justify-content: right;
+  color: white;
+  font-style: bold;
+  background-color: red;
+}
 .btn-showNote-delete {
   display: flex;
   direction: row;

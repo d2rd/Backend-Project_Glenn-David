@@ -54,21 +54,21 @@ class Notes extends Component {
           <div className="Notes-panel">
             <ul>
             {this.state.notes.map(note =>
-                <li key={note.id}>
+              <li key={note.id}>
                 <div className="Title">
-                <h3>{ note.title }</h3><div className="Priority">Priority: {note.priority}</div> 
+                  <h3>{note.title}</h3><div className="Priority">Priority: {note.priority}</div>
                 </div>
-                { note.body }
-                <p></p> 
-                <a href={ note.urlAddress }>View product</a>  |    
-                  <a href={ note.reviewURL }> Read reviews</a>  |    
-                  <a href={ note.audioFileURL }>  Play audio</a>
-                  {/* <Button color="danger" onClick={()=> this.props.removeNote(id)}>x</Button> */}
-                
-                </li>  
+                {note.body}
+                <p></p>
+                <a href={note.urlAddress}>View product</a>  |
+                  <a href={note.reviewURL}> Read reviews</a>  |
+                  <a href={note.audioFileURL}>  Play audio</a>
+                <button className="btn-itemDelete">X</button>
+                {/* <button color="danger" onClick={()=> this.props.removeNote(id)}>x</button> */}
+
+              </li>  
               )}
             </ul>
-
           </div>
         </div>
       </div>
