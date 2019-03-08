@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { Button } from 'reactstrap';
+// import { Container, LGroup, ListGroupItem } from 'reactstrap';
 import './Notes.css';
 // import logo from '../src/assets/D2rdroid2.png';  //move to ./assets folder
 const url = 'http://localhost:5501/notes'
@@ -36,8 +38,15 @@ callAPI () {
 componentDidMount() {
   this.callAPI();
 }
-  removeNote(id) {
-    this.setState({notes: this.state.notes.filter(note => note.id !== id)})
+  // removeNote(id) {
+  //   this.setState({notes: this.state.notes.filter(note => id !== id)})
+  // }
+
+  // removeNote() {
+  //   this.setState({notes: this.state.notes.filter(notes.id )})
+  // }
+ removeNote = id => {
+    this.setState({notes: this.state.notes.filter(note => id )})
   }
   render() {
     return (
@@ -80,8 +89,8 @@ componentDidMount() {
                   <a href={note.urlAddress}>View product</a>  |
                   <a href={note.reviewURL}> Read reviews</a>  |
                   <a href={note.audioFileURL}>  Play audio</a>
-                  <button className="btn-itemDelete">X</button>
-                  {/* <button color="danger" onClick={()=> this.props.removeNote(id)}>x</button> */}
+                  {/* <button className="btn-itemDelete">X</button> */}
+                  <Button className="btn-itemDelete" onClick={()=> this.props.removeNote(id)}>Delete</Button>
 
                 </li>
 
