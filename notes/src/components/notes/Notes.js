@@ -38,16 +38,14 @@ callAPI () {
 componentDidMount() {
   this.callAPI();
 }
-  // removeNote(id) {
-  //   this.setState({notes: this.state.notes.filter(note => id !== id)})
-  // }
+// removeNote() {
+//   this.setState({notes: this.state.notes.filter(notes.id )})
+// }
 
-  // removeNote() {
-  //   this.setState({notes: this.state.notes.filter(notes.id )})
+  // removeNoteTest() {
+  //   console.log('clicked');
+  //   alert('button was clicked');
   // }
- removeNote = id => {
-    this.setState({notes: this.state.notes.filter(note => id )})
-  }
   render() {
     return (
       <div>
@@ -70,9 +68,12 @@ componentDidMount() {
             <div>
               <button className="btn-NavButton" onClick={() => this.props.createNote}>Create New Note</button>
             </div>
-            <div>
+            {/* <div>
               <button className="btn-NavButton" onClick={() => this.props.deleteNote}>Delete a Note</button>
-            </div>
+            </div> */}
+            {/* <div>
+              <button className="btn-NavButton" onClick={this.removeNoteTest()}>TestButton</button>
+            </div> */}
           
           </div>
           <div className="Notes-panel">
