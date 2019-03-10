@@ -194,8 +194,13 @@ body {
   text-align: center;
 
 }
-
+.Note-title-row {
+  display: flex;
+  justify-content: space-between;
+}
 .Note-summary {
+  display: inline-block;
+  justify-content: space-between;
   background-color: rgb(70, 175, 207);
   height: 100px;
   width: 348px;

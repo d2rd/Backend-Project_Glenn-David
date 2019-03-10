@@ -50,15 +50,15 @@ componentDidMount() {
     return (
       <div>
         <div className="View-header">
-         <h1>Notes found about Electric Uprights</h1>
+        <h1>Notes found about Electric Uprights</h1>
         </div>
         <div className="PanelContainer">
           <div className="Nav-panel">
-            <div>
+          <div>
               <button className="btn-NavButton" onClick={() => this.props.getNotes}>View All Notes</button>
               {/* <button className="btn-NavButton" onClick={() => { alert("hey david this button works!")}}>View Your Notes</button> */}
             </div>
-            <div>
+          <div>
               <button className="btn-NavButton" onClick={() => this.props.showSelectedNote}>View Selected Note</button>
               {/* <button className="btn-NavButton" onClick={() => { alert("hey david")}}>View Your Notes</button> */}
             </div>
@@ -80,8 +80,13 @@ componentDidMount() {
             <ul>
               {this.state.notes.map((note, id) =>
                 <li key={id}>
-                <div className="Note-title-row"><h3 className="Title">{note.title}</h3><h3 className="Priority">Priority: {note.priority}</h3>
-                </div>
+                <span>
+                  <div className="Title">
+                    <h3>{note.title}</h3>
+                    <div className="Priority">Priority: {note.priority}
+                    </div>
+                  </div>
+                </span>
                   {note.body}
                   <p></p>
                   <a href={note.urlAddress}>View product</a>  |
