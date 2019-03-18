@@ -1,3 +1,7 @@
+// import axios from './axios';
+// import express from './express';
+const Axios = require("axios");
+// ☞ 9db3411f-cebb-4bf4-89e9-5863a47fe093
 // using mLab/d2rd/notes db.collection(notes)
 const express = require('express');
 const helmet = require('helmet');
@@ -18,6 +22,8 @@ const activeDB = mLabNotes; // avoids hardcoding db into mongoose.connect line 2
 
 
 // connect to database
+// ☞ 146f9172-e282-429c-8e24-5be73c857d36
+
 const options = {
   user:"d2rd",
   pass:"d2rd-PW",
@@ -33,10 +39,10 @@ mongoose.connect(activeDB, options)
 // ☞ 8cf866c9-a061-48df-a275-ebdbf2196f60
 // REFACTORED TO MOVE NOTES TO MONGODB
 
-
+//MIDDLEWARES
 server.use(express.json()) // bodyParser function for json payloads
 
-server.use(helmet())
+server.use(helmet()) // security middleware that hardens some node vulnerabilities.
 
 // Allow Cross-origin Resource Sharing i.e. between netlify, heroku and mlab
 // server.use(cors());
@@ -50,7 +56,7 @@ server.use((req, res, next) =>{
   next();  // allows other routes to take over.
 })
 
-//add CRUD routes
+//ROUTES - add CRUD routes
 server.get('/', (req, res) => {
   res.send('Hello from the d2rd Notes back-end express server using MongoDB on mLab'); // sanity check
 });
@@ -64,8 +70,8 @@ server.get('/Notes', (req, res) => {
 })
 
 server.post('/Notes/create', (req, res) => {
-  const { title, body } = req.body;
-  const myNote = { title, body };
+  const { title, priority, body, urlAddress, reviewURL, videoURL, audioFileURL } = req.body;
+  const myNote = { title, priority, body, urlAddress, reviewURL, videoURL, audioFileURL };
   const newNote = new Note(myNote)
   newNote.save()
     .then(note => {
@@ -84,7 +90,7 @@ server.put('/Notes/update/:id', (req, res) => {
     .catch(err => console.log(err))
 })
 
-server.delete('/Notes/delete/:id', deleteFunc)
+server.delete('/Notes/delete/:_id', deleteFunc)
 
 function deleteFunc (req, res) {
   console.log(req.params.id);

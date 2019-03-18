@@ -98,6 +98,8 @@ componentDidMount() {
                   <p></p>
                   <a href={note.urlAddress}>View product</a>  |
                   <a href={note.reviewURL}> Read reviews</a>  |
+                  <a href={note.videoURL}>  Play video</a>
+                  |
                   <a href={note.audioFileURL}>  Play audio</a>
                   {/* <button className="btn-itemDelete">X</button> */}
                   {/* <Button className="btn-itemDelete" onClick={()=> this.props.removeNote(id)}>Delete</Button> */}
