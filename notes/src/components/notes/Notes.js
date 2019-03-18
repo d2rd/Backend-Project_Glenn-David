@@ -38,14 +38,26 @@ callAPI () {
 componentDidMount() {
   this.callAPI();
 }
-// removeNote() {
-//   this.setState({notes: this.state.notes.filter(notes.id )})
+// removeNote(id) {
+//   this.setState({notes: this.state.notes.filter(note => note.id !== id )});
 // }
 
   // removeNoteTest() {
   //   console.log('clicked');
   //   alert('button was clicked');
   // }
+
+ deleteFunc (req, res) {
+    console.log(req.params.id);
+    Notes
+      .findByIdAndRemove(req.params.id)
+      .then(note => {
+        res.send('The note was deleted')
+      })
+      .catch(err => console.log(err));
+  };
+  
+
   render() {
     return (
       <div>
@@ -88,7 +100,8 @@ componentDidMount() {
                   <a href={note.reviewURL}> Read reviews</a>  |
                   <a href={note.audioFileURL}>  Play audio</a>
                   {/* <button className="btn-itemDelete">X</button> */}
-                  <Button className="btn-itemDelete" onClick={()=> this.props.removeNote(id)}>Delete</Button>
+                  {/* <Button className="btn-itemDelete" onClick={()=> this.props.removeNote(id)}>Delete</Button> */}
+                  <Button className="btn-itemDelete" onClick={()=> this.props.deleteFunc(id)}>Delete</Button>
 
                 </li>
 
