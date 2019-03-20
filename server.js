@@ -1,6 +1,6 @@
 // import axios from './axios';
 // import express from './express';
-const Axios = require("axios");
+const Server = require("axios");
 // ☞ 9db3411f-cebb-4bf4-89e9-5863a47fe093
 // using mLab/d2rd/notes db.collection(notes)
 const express = require('express');
@@ -55,32 +55,48 @@ server.use((req, res, next) =>{
   }
   next();  // allows other routes to take over.
 })
+//TEST DATA
+const newTestNote = {
+  "title": "Yamaha SLB-200LTD Silent Bass",
+  "priority": 3,
+  "body": "The most popular Electric Upright Bass in the line-up."
+};
 
 //ROUTES - add CRUD routes
-server.get('/', (req, res) => {
+Server.get('/', (req, res) => {
   res.send('Hello from the d2rd Notes back-end express server using MongoDB on mLab'); // sanity check
 });
 
-server.get('/Notes', (req, res) => {
+Server.get('/Notes', (req, res) => {
   Note.find()
     .then((data) => {
       res.json(data)
     })
     .catch(err => console.log(err.message))
 })
+/*
+// Server.post('/Notes/create', (req, res) => {
+//   const { title, priority, body, urlAddress, reviewURL, videoURL, audioFileURL } = req.body;
+//   const myNote = { title, priority, body, urlAddress, reviewURL, videoURL, audioFileURL };
+//   const newNote = new Note(myNote)
+//   newNote.save()
+//     .then(note => {
+//       res.status(201).json(note)
+//     })
+//     .catch(err => console.log(err))
+// });
 
-server.post('/Notes/create', (req, res) => {
-  const { title, priority, body, urlAddress, reviewURL, videoURL, audioFileURL } = req.body;
-  const myNote = { title, priority, body, urlAddress, reviewURL, videoURL, audioFileURL };
-  const newNote = new Note(myNote)
-  newNote.save()
-    .then(note => {
-      res.status(201).json(note)
-    })
-    .catch(err => console.log(err))
-});
+// TEST SYNTAX
 
-server.put('/Notes/update/:id', (req, res) => {
+// Server.post('http://localhost:5501/Notes', (req, res) {
+//   .then()
+
+// })
+// .then(function(response){
+//   console.log('saved successfully')
+// });
+*/
+Server.put('/Notes/update/:id', (req, res) => {
   console.log(req.params.id)
   Note
     .findByIdAndUpdate(req.params.id, {title: req.body.title, body: req.body.body})
@@ -90,7 +106,7 @@ server.put('/Notes/update/:id', (req, res) => {
     .catch(err => console.log(err))
 })
 
-server.delete('/Notes/delete/:_id', deleteFunc)
+Server.delete('/Notes/delete/:_id', deleteFunc)
 
 function deleteFunc (req, res) {
   console.log(req.params.id);
