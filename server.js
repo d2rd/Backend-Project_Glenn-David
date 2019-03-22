@@ -3,6 +3,7 @@ const express = require('express');
 const helmet = require('helmet');
 const mongoose = require('mongoose');
 // const Schema = mongoose.Schema;
+const Axios = require("axios");
 const cors = require('cors');
 const port = 5501;
 const server = express();
@@ -33,7 +34,40 @@ mongoose.connect(activeDB, options)
 // ☞ 8cf866c9-a061-48df-a275-ebdbf2196f60
 // REFACTORED TO MOVE NOTES TO MONGODB
 
+//USING AXIOS REQUESTS 3-21-19
+Axios.get(mLabNotes)
+// .then( (response ) => { console.log(response)})
+.then( (response ) => { console.log(response.status)})
+.catch( (err) => { console.log(err)})
 
+// Axios.post(mLabNotes, {[body here]}) 
+// Axios.post('https://www.gggggggle.com/search?q=trees', {
+//   name:'David',
+//   city: 'OAK'
+// })
+// .then((response) =>{}) 
+
+// Axios.put('https://www.gggggggle.com/search?q=trees', {
+//   name:'David',
+//   city: 'SFO'
+// })
+// .then((response) =>{})
+
+// Axios.delete('https://www.gggggggle.com/search?q=trees', {
+//   name:'David'})
+//   .then((response) =>{})
+
+  //NOTES FROM LECTURE
+  // Should always must return something.  Not required but if no return what's the point?
+    // asyncFunction()
+    // .then(anotherAsyncFunction) (firstThing) => {return someting}
+    // .then(OneMoreAsyncFunc) (something) => {return somethingElse}
+    // .catch(errorHandlingFunction)
+
+  // callback hell is a real thing.  Promises solves this.
+//===========================
+
+//ORIGINAL SERVER REQUESTS before 3-21-19
 server.use(express.json()) // bodyParser function for json payloads
 
 server.use(helmet())
