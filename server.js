@@ -62,6 +62,41 @@ const newTestNote = {
   "body": "The most popular Electric Upright Bass in the line-up."
 };
 
+//USING AXIOS REQUESTS 3-21-19
+Axios.get(mLabNotes)
+// .then( (response ) => { console.log(response)})
+.then( (response ) => { console.log(response.status)})
+.catch( (err) => { console.log(err)})
+
+Axios.post(mLabNotes, {newTestNote}) 
+Axios.post('https://www.gggggggle.com/search?q=trees', {
+  "title": "Yamaha SLB-200LTD Silent Bass",
+  "priority": 3,
+  "body": "The most popular Electric Upright Bass in the line-up."
+})
+.then((response) =>{}) 
+
+// Axios.put('https://www.gggggggle.com/search?q=trees', {
+//   name:'David',
+//   city: 'SFO'
+// })
+// .then((response) =>{})
+
+// Axios.delete('https://www.gggggggle.com/search?q=trees', {
+//   name:'David'})
+//   .then((response) =>{})
+
+  //NOTES FROM LECTURE
+  // Should always must return something.  Not required but if no return what's the point?
+    // asyncFunction()
+    // .then(anotherAsyncFunction) (firstThing) => {return someting}
+    // .then(OneMoreAsyncFunc) (something) => {return somethingElse}
+    // .catch(errorHandlingFunction)
+
+  // callback hell is a real thing.  Promises solves this.
+//===========================
+
+//ORIGINAL SERVER REQUESTS before 3-21-19
 //ROUTES - add CRUD routes
 Server.get('/', (req, res) => {
   res.send('Hello from the d2rd Notes back-end express server using MongoDB on mLab'); // sanity check
