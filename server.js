@@ -34,18 +34,27 @@ mongoose.connect(activeDB, options)
 // ☞ 8cf866c9-a061-48df-a275-ebdbf2196f60
 // REFACTORED TO MOVE NOTES TO MONGODB
 
+//TEST DATA
+const newTestNote = {
+  "title": "Yamaha SLB-200LTD Silent Bass",
+  "priority": 3,
+  "body": "The most popular Electric Upright Bass in the line-up."
+};
+
+
 //USING AXIOS REQUESTS 3-21-19
 Axios.get(mLabNotes)
 // .then( (response ) => { console.log(response)})
 .then( (response ) => { console.log(response.status)})
 .catch( (err) => { console.log(err)})
 
-// Axios.post(mLabNotes, {[body here]}) 
-// Axios.post('https://www.gggggggle.com/search?q=trees', {
-//   name:'David',
-//   city: 'OAK'
-// })
-// .then((response) =>{}) 
+Axios.post(mLabNotes, {newTestNote}) 
+Axios.post('https://www.gggggggle.com/search?q=trees', {
+  "title": "Yamaha SLB-200LTD Silent Bass",
+  "priority": 3,
+  "body": "The most popular Electric Upright Bass in the line-up."
+})
+.then((response) =>{}) 
 
 // Axios.put('https://www.gggggggle.com/search?q=trees', {
 //   name:'David',
