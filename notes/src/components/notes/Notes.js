@@ -117,3 +117,25 @@ componentDidMount() {
 }
 
 export default Notes;
+
+
+
+//Declarations/imports
+const express = require('express')
+...
+
+//Connections
+mongoose.connect()
+...
+
+//Middlewares
+server.use()
+...
+
+//Routes
+Server.get()
+Server.post()
+...
+…
+
+server.listen()
