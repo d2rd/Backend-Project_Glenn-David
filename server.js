@@ -1,15 +1,29 @@
+// import axios from './axios';
+// import express from './express';
+const Server = require("axios");
+// ☞ 9db3411f-cebb-4bf4-89e9-5863a47fe093
+// using mLab/d2rd/notes db.collection(notes)
 const express = require('express');
 const helmet = require('helmet');
 const mongoose = require('mongoose');
+// const Schema = mongoose.Schema;
 const cors = require('cors');
-const port = 5000;
+const port = 5501;
 const server = express();
-const ElectricUpright = require('./models/ElectricUpright')
-// const SpeakerCabinets = require('./models/SpeakerCabinets')
-// const Misc = require('./models/Misc')
-// const NoteItem = require('./models/NoteItem')
+
+// Define available models
+const Note = require('./models/Note')
+
+//Define available databases and their connection strings
+const mLabNotes = 'mongodb://ds149742.mlab.com:49742/notes';
+
+// Set active database
+const activeDB = mLabNotes; // avoids hardcoding db into mongoose.connect line 27
+
 
 // connect to database
+// ☞ 146f9172-e282-429c-8e24-5be73c857d36
+
 const options = {
   user:"d2rd",
   pass:"d2rd-PW",
@@ -17,114 +31,127 @@ const options = {
 }
 // ☞ bd397750-457f-4308-b616-f0424ddc5d04
 
-mongoose.connect('mongodb://ds141611.mlab.com:41611/d2rd-notes', options)
-.then(() => console.log('Success connecting the MongoDB/d2rd-notes on mlab'))
+mongoose.connect(activeDB, options)
+.then(() => console.log('Success connecting the MongoDB/notes on mlab'))
 .catch((err) => console.log(err.message)) // TEST: changing PW should throw 'authentication failed error
-
+// NOTE: EACH DB HAS A UNIQUE CONNECTION STRING
 // create schema
 // ☞ 8cf866c9-a061-48df-a275-ebdbf2196f60
 // REFACTORED TO MOVE NOTES TO MONGODB
 
+//MIDDLEWARES
 server.use(express.json()) // bodyParser function for json payloads
 
-server.use(helmet())
-server.use(cors()); // ie between netlify, heroku and mlab
+server.use(helmet()) // security middleware that hardens some node vulnerabilities.
 
-// const memCache ={}; 
+// Allow Cross-origin Resource Sharing i.e. between netlify, heroku and mlab
+// server.use(cors());
+server.use((req, res, next) =>{
+  res.header("Access-Control-Allow-Origin", "*");  //`*` allows all sites to make requests.  change to specific domains to restrict access.
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
+  if (req.method === 'OPTIONS') {
+    res.header('Access-Control-Allow-Methods', 'PUT, POST, PATCH,DELETE, GET')
+    return res.status(200).json({})
+  }
+  next();  // allows other routes to take over.
+})
+//TEST DATA
+const newTestNote = {
+  "title": "Yamaha SLB-200LTD Silent Bass",
+  "priority": 3,
+  "body": "The most popular Electric Upright Bass in the line-up."
+};
 
-//add CRUD routes
-server.get('/', (req, res) => {
-  res.send('Hello from the express server'); // sanity check
+//USING AXIOS REQUESTS 3-21-19
+Axios.get(mLabNotes)
+// .then( (response ) => { console.log(response)})
+.then( (response ) => { console.log(response.status)})
+.catch( (err) => { console.log(err)})
+
+Axios.post(mLabNotes, {newTestNote}) 
+Axios.post('https://www.gggggggle.com/search?q=trees', {
+  "title": "Yamaha SLB-200LTD Silent Bass",
+  "priority": 3,
+  "body": "The most popular Electric Upright Bass in the line-up."
+})
+.then((response) =>{}) 
+
+// Axios.put('https://www.gggggggle.com/search?q=trees', {
+//   name:'David',
+//   city: 'SFO'
+// })
+// .then((response) =>{})
+
+// Axios.delete('https://www.gggggggle.com/search?q=trees', {
+//   name:'David'})
+//   .then((response) =>{})
+
+  //NOTES FROM LECTURE
+  // Should always must return something.  Not required but if no return what's the point?
+    // asyncFunction()
+    // .then(anotherAsyncFunction) (firstThing) => {return someting}
+    // .then(OneMoreAsyncFunc) (something) => {return somethingElse}
+    // .catch(errorHandlingFunction)
+
+  // callback hell is a real thing.  Promises solves this.
+//===========================
+
+//ORIGINAL SERVER REQUESTS before 3-21-19
+//ROUTES - add CRUD routes
+Server.get('/', (req, res) => {
+  res.send('Hello from the d2rd Notes back-end express server using MongoDB on mLab'); // sanity check
 });
 
-server.get('/ElectricUprights', (req, res) => {
-  ElectricUpright.find()
+Server.get('/Notes', (req, res) => {
+  Note.find()
     .then((data) => {
       res.json(data)
     })
     .catch(err => console.log(err.message))
 })
-
-server.post('/ElectricUprights/create', (req, res) => {
-  const { title, priority, body, price, itemURL, reviewURL } = req.body;
-  const myNote = { title, priority, body, price, itemURL, reviewURL };
-  const newNote = new ElectricUpright(myNote)
-  newNote.save()
-    .then(note => {
-      res.status(201).json(note)
-    })
-    .catch(err => console.log(err))
-});
-// METHOD 1 req.body
-// server.put('/ElectricUprights/update/', (req, res) => {
-//   console.log(req.body)
-//   ElectricUpright.findByIdAndUpdate(req.body._id, {price: req.body.price, itemURL: req.body.itemURL})
+/*
+// Server.post('/Notes/create', (req, res) => {
+//   const { title, priority, body, urlAddress, reviewURL, videoURL, audioFileURL } = req.body;
+//   const myNote = { title, priority, body, urlAddress, reviewURL, videoURL, audioFileURL };
+//   const newNote = new Note(myNote)
+//   newNote.save()
 //     .then(note => {
 //       res.status(201).json(note)
 //     })
 //     .catch(err => console.log(err))
+// });
+
+// TEST SYNTAX
+
+// Server.post('http://localhost:5501/Notes', (req, res) {
+//   .then()
+
 // })
-// METHOD 2 req.params
-server.put('/ElectricUprights/update/:id', (req, res) => {
+// .then(function(response){
+//   console.log('saved successfully')
+// });
+*/
+Server.put('/Notes/update/:id', (req, res) => {
   console.log(req.params.id)
-  ElectricUpright
-    .findByIdAndUpdate(req.params.id, {price: req.body.price, itemURL: req.body.itemURL})
+  Note
+    .findByIdAndUpdate(req.params.id, {title: req.body.title, body: req.body.body})
     .then(note => {
       res.status(201).json(note)
     })
     .catch(err => console.log(err))
 })
 
-server.delete('/ElectricUprights/delete/:id', deleteFunc)
+Server.delete('/Notes/delete/:_id', deleteFunc)
 
 function deleteFunc (req, res) {
   console.log(req.params.id);
-  ElectricUpright
+  Note
     .findByIdAndRemove(req.params.id)
     .then(note => {
       res.send('The note was deleted')
     })
     .catch(err => console.log(err));
 };
-
-// ADDING MIDDLEWARE
-// server.delete('/ElectricUprights/update/:id', authorizeUserMiddleware, deleteFunc)
-
-// function deleteFunc (req, res) {
-//   console.log(req.params.id);
-//   ElectricUpright
-//     .findByIdAndRemove(req.params.id)
-//     .then(note => {
-//       res.status(201).json(note)
-//     })
-//     .catch(err => console.log(err));
-// };
-
-// server.delete('/ElectricUprights/update/:id', (req, res) => {
-//   console.log(req.params.id)
-//   ElectricUpright.findByIdAndRemove(req.params.id);
-//   const newNotes = d2rdNotes.filter(note => {
-//     return id !== note.id;
-//   });
-//   d2rdNotes = newNotes;
-//   res.send(d2rdNotes);
-// });
-// **** OTHER COLLECTIONS ***
-// server.get('/SpeakerCabinets', (req, res) => {
-//   SpeakerCabinets.find()
-//     .then((data) => {
-//       res.json(data)
-//     })
-//     .catch(err => console.log(err.message))
-// })
-
-// server.get('/misc', (req, res) => {
-//   misc.find()
-//     .then((data) => {
-//       res.json(data)
-//     })
-//     .catch(err => console.log(err.message))
-// })
 
 server.listen(port, () => {
   console.log(`server listening on port ${port}`);
