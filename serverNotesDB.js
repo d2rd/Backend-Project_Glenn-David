@@ -3,7 +3,6 @@ const express = require('express');
 const helmet = require('helmet');
 const mongoose = require('mongoose');
 // const Schema = mongoose.Schema;
-// const Axios = require("axios");
 const cors = require('cors');
 const port = 5501;
 const server = express();
@@ -11,12 +10,8 @@ const server = express();
 // Define available models
 const Note = require('./models/Note')
 
-//Define available databases and their connection strings
+//Define available databases
 const mLabNotes = 'mongodb://ds149742.mlab.com:49742/notes';
-
-// Set active database
-const activeDB = mLabNotes; // avoids hardcoding db into mongoose.connect line 27
-
 
 // connect to database
 const options = {
@@ -26,55 +21,15 @@ const options = {
 }
 // ☞ bd397750-457f-4308-b616-f0424ddc5d04
 
-mongoose.connect(activeDB, options)
+mongoose.connect(mLabNotes, options)
 .then(() => console.log('Success connecting the MongoDB/notes on mlab'))
-.catch((err) => console.log(err.message)) 
-// ☞ b71f0ee3-4e8e-4cda-ad79-5b7038d878e0
+.catch((err) => console.log(err.message)) // TEST: changing PW should throw 'authentication failed error
+// NOTE: EACH DB HAS A UNIQUE CONNECTION STRING
+// create schema
+// ☞ 8cf866c9-a061-48df-a275-ebdbf2196f60
+// REFACTORED TO MOVE NOTES TO MONGODB
 
-//TEST DATA
-const newTestNote = {
-  "title": "Yamaha SLB-200LTD Silent Bass",
-  "priority": 3,
-  "body": "The most popular Electric Upright Bass in the line-up."
-};
 
-// Routes from Sprint-Challenge RDBMS-cspt2 
-// ☞ 997aad78-3c3a-4e0b-bf4c-37b8879abf64
-//USING AXIOS REQUESTS 3-21-19
-Axios.get(mLabNotes)
-// .then( (response ) => { console.log(response)})
-.then( (response ) => { console.log(response.status)})
-.catch( (err) => { console.log(err)})
-
-Axios.post(mLabNotes, {newTestNote}) 
-Axios.post('https://www.gggggggle.com/search?q=trees', {
-  "title": "Yamaha SLB-200LTD Silent Bass",
-  "priority": 3,
-  "body": "The most popular Electric Upright Bass in the line-up."
-})
-.then((response) =>{}) 
-
-// Axios.put('https://www.gggggggle.com/search?q=trees', {
-//   name:'David',
-//   city: 'SFO'
-// })
-// .then((response) =>{})
-
-// Axios.delete('https://www.gggggggle.com/search?q=trees', {
-//   name:'David'})
-//   .then((response) =>{})
-
-  //NOTES FROM LECTURE
-  // Should always must return something.  Not required but if no return what's the point?
-    // asyncFunction()
-    // .then(anotherAsyncFunction) (firstThing) => {return someting}
-    // .then(OneMoreAsyncFunc) (something) => {return somethingElse}
-    // .catch(errorHandlingFunction)
-
-  // callback hell is a real thing.  Promises solves this.
-//===========================
-
-//ORIGINAL SERVER REQUESTS before 3-21-19
 server.use(express.json()) // bodyParser function for json payloads
 
 server.use(helmet())
