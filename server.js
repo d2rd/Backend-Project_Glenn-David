@@ -28,11 +28,8 @@ const options = {
 
 mongoose.connect(activeDB, options)
 .then(() => console.log('Success connecting the MongoDB/notes on mlab'))
-.catch((err) => console.log(err.message)) // TEST: changing PW should throw 'authentication failed error
-// NOTE: EACH DB HAS A UNIQUE CONNECTION STRING
-// create schema
-// ☞ 8cf866c9-a061-48df-a275-ebdbf2196f60
-// REFACTORED TO MOVE NOTES TO MONGODB
+.catch((err) => console.log(err.message)) 
+// ☞ b71f0ee3-4e8e-4cda-ad79-5b7038d878e0
 
 //TEST DATA
 const newTestNote = {
