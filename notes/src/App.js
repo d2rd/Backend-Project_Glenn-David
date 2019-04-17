@@ -15,19 +15,6 @@ class App extends Component {
       notes: []
     }
   }
-  // removeNote(id) {
-  //   this.setState({notes: this.state.notes.filter(note => note.id !== id )});
-  // }
-  deleteFunc (req, res) {
-    console.log(req.params.id);
-    Notes
-      .findByIdAndRemove(req.params.id)
-      .then(note => {
-        res.send('The note was deleted')
-      })
-      .catch(err => console.log(err));
-  };
-  
   
 
   render() {
