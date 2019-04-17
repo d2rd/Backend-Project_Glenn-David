@@ -18,7 +18,7 @@ const mLabNotes = 'mongodb://ds149742.mlab.com:49742/notes';
 const activeDB = mLabNotes; // avoids hardcoding db into mongoose.connect line 27
 
 
-// connect to database
+// connect to database  ** MOVE TO ENV VARIABLE
 const options = {
   user:"d2rd",
   pass:"d2rd-PW",
@@ -30,6 +30,13 @@ mongoose.connect(activeDB, options)
 .then(() => console.log('Success connecting the MongoDB/notes on mlab'))
 .catch((err) => console.log(err.message)) 
 // ☞ b71f0ee3-4e8e-4cda-ad79-5b7038d878e0
+
+// Suggested by CK as standard syntax
+const db=mongoose.connection;
+db.on('error', console.error.bind(console, 'connection error'));
+db.once('open', () => {
+  console.log('connected');
+});
 
 //TEST DATA
 const newTestNote = {

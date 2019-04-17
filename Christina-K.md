@@ -90,3 +90,19 @@ const UserInfo = myDB.model('userInfo', userInfoSchema);
  
 export default UserInfo;```
 Where myDB is your database name.
+
+* Glenn-David Daniel [3:51 PM] * 
+Okay.  The way I did things using two variables was to allow me to designate different connection strings as the ‘activeDB’ so that I could easily switch  to another database.  `mLabNotes` holds the connection string for one db of the three I currently have on mLab.  Others are `d2rd-notes` and `traversy_media-mern-shopping` (for a tutorial).
+
+The idea is that I assign each unique connection string a variable and easily switch programmatically by setting the value of `activeDB` to that connection variable.  That was its not hard coded deeper in the code and I can bring out a switch to the UI via a dropdown labeled “Choose a database to access.”  A similar mechanism would be used to populate a list of collections in the chosen db then push it to the UI labeled as “Select a collection in this database.”  Once those two choices are made the system renders the notes in the selected collection.  I hope this makes more sense.
+
+All the above are stretches to be done AFTER I get this MVP working!  :frustrateduser:
+
+I agree that I will eventually want to refactor to remove db strings to env variable.  Took that short cut early on because I wanted to simplify everything until I understand it fully.Glenn-David Daniel [3:51 PM]
+Okay.  The way I did things using two variables was to allow me to designate different connection strings as the ‘activeDB’ so that I could easily switch  to another database.  `mLabNotes` holds the connection string for one db of the three I currently have on mLab.  Others are `d2rd-notes` and `traversy_media-mern-shopping` (for a tutorial).
+
+The idea is that I assign each unique connection string a variable and easily switch programmatically by setting the value of `activeDB` to that connection variable.  That was its not hard coded deeper in the code and I can bring out a switch to the UI via a dropdown labeled “Choose a database to access.”  A similar mechanism would be used to populate a list of collections in the chosen db then push it to the UI labeled as “Select a collection in this database.”  Once those two choices are made the system renders the notes in the selected collection.  I hope this makes more sense.
+
+All the above are stretches to be done AFTER I get this MVP working!  :frustrateduser:
+
+I agree that I will eventually want to refactor to remove db strings to env variable.  Took that short cut early on because I wanted to simplify everything until I understand it fully.
