@@ -38,14 +38,7 @@ callAPI () {
 componentDidMount() {
   this.callAPI();
 }
-// removeNote(id) {
-//   this.setState({notes: this.state.notes.filter(note => note.id !== id )});
-// }
 
-  // removeNoteTest() {
-  //   console.log('clicked');
-  //   alert('button was clicked');
-  // }
 
  deleteFunc (req, res) {
     console.log(req.params.id);

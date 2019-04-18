@@ -3,7 +3,7 @@ const express = require('express');
 const helmet = require('helmet');
 const mongoose = require('mongoose');
 // const Schema = mongoose.Schema;
-// const Axios = require("axios");
+
 const cors = require('cors');
 const port = 5501;
 const server = express();
@@ -47,39 +47,7 @@ const newTestNote = {
 
 // Routes from Sprint-Challenge RDBMS-cspt2 
 // ☞ 997aad78-3c3a-4e0b-bf4c-37b8879abf64
-//USING AXIOS REQUESTS 3-21-19
-Axios.get(mLabNotes)
-// .then( (response ) => { console.log(response)})
-.then( (response ) => { console.log(response.status)})
-.catch( (err) => { console.log(err)})
 
-Axios.post(mLabNotes, {newTestNote}) 
-Axios.post('https://www.gggggggle.com/search?q=trees', {
-  "title": "Yamaha SLB-200LTD Silent Bass",
-  "priority": 3,
-  "body": "The most popular Electric Upright Bass in the line-up."
-})
-.then((response) =>{}) 
-
-// Axios.put('https://www.gggggggle.com/search?q=trees', {
-//   name:'David',
-//   city: 'SFO'
-// })
-// .then((response) =>{})
-
-// Axios.delete('https://www.gggggggle.com/search?q=trees', {
-//   name:'David'})
-//   .then((response) =>{})
-
-  //NOTES FROM LECTURE
-  // Should always must return something.  Not required but if no return what's the point?
-    // asyncFunction()
-    // .then(anotherAsyncFunction) (firstThing) => {return someting}
-    // .then(OneMoreAsyncFunc) (something) => {return somethingElse}
-    // .catch(errorHandlingFunction)
-
-  // callback hell is a real thing.  Promises solves this.
-//===========================
 
 //ORIGINAL SERVER REQUESTS before 3-21-19
 server.use(express.json()) // bodyParser function for json payloads
@@ -98,7 +66,19 @@ server.use((req, res, next) =>{
   next();  // allows other routes to take over.
 })
 
+// functions moved from other modules
+// removeNote(id) {
+//   this.setState({notes: this.state.notes.filter(note => note.id !== id )});
+// }
+
+  // removeNoteTest() {
+  //   console.log('clicked');
+  //   alert('button was clicked');
+  // }
+  
 //add CRUD routes
+// ☞ b40e7ff7-8839-4559-b551-e7ac95465cba
+
 server.get('/', (req, res) => {
   res.send('Hello from the d2rd Notes back-end express server using MongoDB on mLab'); // sanity check
 });
