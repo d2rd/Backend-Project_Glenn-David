@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
+// currently duplicates model `ElectricUpright` for production refactor to pull import this ElectricUpright.
   const NoteSchema = new Schema({
     title: {
       type: String,

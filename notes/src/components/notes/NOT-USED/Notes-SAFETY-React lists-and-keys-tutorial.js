@@ -12,6 +12,7 @@ class Notes extends Component {
     this.state = {
       notes: []
     }
+    this.callAPI = this.callAPI.bind(this); // #4 suggested by CK
   }
 // ☞ e240912c-8d2f-4025-bcd8-dc8f2f72a0c4
 

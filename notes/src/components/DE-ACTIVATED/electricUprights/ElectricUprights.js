@@ -12,8 +12,8 @@ class ElectricUprights extends Component {
   componentDidMount() {
     fetch(url) // Call the fetch function passing the url of the API as a parameter
       .then(res => res.json())
-      .then(electricUprights => this.setState({electricUprights}, () => console.log('ElectricUprights fetched...', electricUprights)
-        ))
+      .then(electricUprights => this.setState({electricUprights,data}, () => console.log('ElectricUprights fetched...', electricUprights)
+        )) // ck suggestion #3
         .catch(error => {
           console.error('Error fetching electricUprights:', error);
         })

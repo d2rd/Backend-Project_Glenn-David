@@ -12,6 +12,7 @@ class Notes extends Component {
     this.state = {
       notes: []
     }
+   this.callAPI = this.callAPI.bind(this); // #4 suggested by CK
   }
 // ☞ e240912c-8d2f-4025-bcd8-dc8f2f72a0c4
 
@@ -50,12 +51,17 @@ componentDidMount() {
       .catch(err => console.log(err));
   };
   
+  removeNote(id) {
+    this.setState({notes: this.state.notes.filter(note => note.id !== id)})
+  }  //adapted from video https://youtu.be/KItsR6pM5lY
+
 
   render() {
     return (
       <div>
         <div className="View-header">
          <h1>Notes found about Electric Uprights</h1>
+         {/* <h1>Notes found about {activeDB}</h1> // ck suggestion #5 dynamic collection name */}
         </div>
         <div className="PanelContainer">
           <div className="Nav-panel">

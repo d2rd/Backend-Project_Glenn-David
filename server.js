@@ -4,6 +4,8 @@ const helmet = require('helmet');
 const mongoose = require('mongoose');
 // const Schema = mongoose.Schema;
 
+// const Axios = require("axios"); ck #6 axios not needed in the backend delete this
+
 const cors = require('cors');
 const port = 5501;
 const server = express();
@@ -38,7 +40,7 @@ db.once('open', () => {
   console.log('connected');
 });
 
-//TEST DATA
+//TEST DATA  CK#7: use faker.js to bring in some fake data so this becomes unnecessary it will scale too.
 const newTestNote = {
   "title": "Yamaha SLB-200LTD Silent Bass",
   "priority": 3,
@@ -75,7 +77,7 @@ server.use((req, res, next) =>{
   //   console.log('clicked');
   //   alert('button was clicked');
   // }
-  
+
 //add CRUD routes
 // ☞ b40e7ff7-8839-4559-b551-e7ac95465cba
 
@@ -127,3 +129,4 @@ function deleteFunc (req, res) {
 server.listen(port, () => {
   console.log(`server listening on port ${port}`);
 });
+
