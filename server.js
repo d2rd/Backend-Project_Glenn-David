@@ -1,12 +1,16 @@
 // using mLab/d2rd/notes db.collection(notes)
 const express = require('express');
 const helmet = require('helmet');
+// import mongoose and the Schema
 const mongoose = require('mongoose');
-// const Schema = mongoose.Schema;
+const NoteSchema = require('./models/Note');
 
 // const Axios = require("axios"); ck #6 axios not needed in the backend delete this
 
 const cors = require('cors');
+// const bodyParser = require('body-parser'); express.json() built-in
+
+
 const port = 5501;
 const server = express();
 
@@ -34,11 +38,11 @@ mongoose.connect(activeDB, options)
 // ☞ b71f0ee3-4e8e-4cda-ad79-5b7038d878e0
 
 // Suggested by CK as standard syntax
-const db=mongoose.connection;
-db.on('error', console.error.bind(console, 'connection error'));
-db.once('open', () => {
-  console.log('connected');
-});
+// const db=mongoose.connection;
+// db.on('error', console.error.bind(console, 'connection error'));
+// db.once('open', () => {
+//   console.log('connected');
+// });
 
 //TEST DATA  CK#7: use faker.js to bring in some fake data so this becomes unnecessary it will scale too.
 const newTestNote = {
@@ -68,15 +72,8 @@ server.use((req, res, next) =>{
   next();  // allows other routes to take over.
 })
 
-// functions moved from other modules
-// removeNote(id) {
-//   this.setState({notes: this.state.notes.filter(note => note.id !== id )});
-// }
+// ☞ aef6a483-59f9-4055-ba52-4a47c55f734d
 
-  // removeNoteTest() {
-  //   console.log('clicked');
-  //   alert('button was clicked');
-  // }
 
 //add CRUD routes
 // ☞ b40e7ff7-8839-4559-b551-e7ac95465cba
@@ -93,16 +90,39 @@ server.get('/Notes', (req, res) => {
     .catch(err => console.log(err.message))
 })
 
+// post handler for new notes
+// REFACTORED POST HANDLER
 server.post('/Notes/create', (req, res) => {
-  const { title, body } = req.body;
-  const myNote = { title, body };
-  const newNote = new Note(myNote)
+  const title = req.body.title;
+  const priority = req.body.priority;
+  const price = req.body.price;
+  const body = req.body.body;
+  const urlAddress = req.body.urlAddress;
+  const reviewURL = req.body.reviewURL;
+  const videoURL = req.body.videoURL;
+  const audioFileURL = req.body.audioFileURL;
+  const timeStamp = new Date();
+  const newNote = new NoteSchema({
+    title: title,
+    priority: priority,
+    price: price,
+    body: body,
+    urlAddress: urlAddress,
+    reviewURL: reviewURL,
+    videoURL: videoURL,
+    audioFileURL: audioFileURL,
+    createdOn: timeStamp,
+  });
   newNote.save()
-    .then(note => {
-      res.status(201).json(note)
-    })
-    .catch(err => console.log(err))
-});
+  .then(response => res.send(`This note was added: ${response}`))
+  .catch(err => {
+    console.log(`There was an error: ${err}`);
+    res.send(`There was an error!`)
+  })
+})
+// CS-MODEL (from Pair Programming exercise)
+// ☞ cbd15263-0c6d-4131-a8ce-a917b40c8495
+
 
 server.put('/Notes/update/:id', (req, res) => {
   console.log(req.params.id)
