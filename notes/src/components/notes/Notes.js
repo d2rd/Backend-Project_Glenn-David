@@ -91,7 +91,7 @@ componentDidMount() {
             <ul>
               {this.state.notes.map((note, id) =>
                 <li key={id}>
-                <div className="Note-title-row"><h3 className="Title">{note.title}</h3><h3 className="Priority">Priority: {note.priority}</h3>
+                <div className="Note-title-row"><h3 className="Title">{note.title}</h3><h3 className="Price">Price: ${note.price}</h3><h3 className="Priority">Priority: {note.priority}</h3>
                 </div>
                   {note.body}
                   <p></p>

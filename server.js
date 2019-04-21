@@ -120,6 +120,8 @@ server.post('/Notes/create', (req, res) => {
     res.send(`There was an error!`)
   })
 })
+// ☞ 43ae1050-8247-4911-97b8-9d10f644a290
+
 // CS-MODEL (from Pair Programming exercise)
 // ☞ cbd15263-0c6d-4131-a8ce-a917b40c8495
 
@@ -127,14 +129,36 @@ server.post('/Notes/create', (req, res) => {
 server.put('/Notes/update/:id', (req, res) => {
   console.log(req.params.id)
   Note
-    .findByIdAndUpdate(req.params.id, {title: req.body.title, body: req.body.body})
+    .findByIdAndUpdate(req.params.id, {
+      title: req.body.title, 
+      priority: req.body.priority,
+      price: req.body.price,
+      body: req.body.body,
+      urlAddress: req.body.urlAddress,
+      reviewURL: req.body.reviewURL,
+      videoURL: req.body.videoURL,
+      audioFileURL: req.body.audioFileURL
+    
+    
+    
+    })
     .then(note => {
       res.status(201).json(note)
     })
     .catch(err => console.log(err))
 })
 
-server.delete('/Notes/delete/:id', deleteFunc)
+// server.patch('/Notes/update/:id', (req, res) => {
+//   console.log(req.params.id)
+//   Note
+//     .findByIdAndUpdate(req.params.id, {price: req.body.price })
+//     .then(note => {
+//       res.status(201).json(note)
+//     })
+//     .catch(err => console.log(err))
+// })
+
+server.delete('/Notes/delete/:id', deleteFunc) // request DELETE http://localhost:5501/Notes/delete/5c761df560483331e5272758
 
 function deleteFunc (req, res) {
   console.log(req.params.id);
