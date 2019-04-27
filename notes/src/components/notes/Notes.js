@@ -79,12 +79,7 @@ componentDidMount() {
             <div>
               <button className="btn-NavButton" onClick={() => this.props.createNote}>Create New Note</button>
             </div>
-            {/* <div>
-              <button className="btn-NavButton" onClick={() => this.props.deleteNote}>Delete a Note</button>
-            </div> */}
-            {/* <div>
-              <button className="btn-NavButton" onClick={this.removeNoteTest()}>TestButton</button>
-            </div> */}
+            
           
           </div>
           <div className="Notes-panel">
@@ -100,11 +95,11 @@ componentDidMount() {
                   <a href={note.audioFileURL}>  Play audio</a>  |
                   <a href={note.gallery}>  Gallery</a>
                   <p></p>
-                  {/* <button className="btn-itemDelete">X</button> */}
-                  <Button className="btn-itemDelete" onClick={()=> this.props.removeNote(note._id)}>Delete</Button>
-                  {/* <Button className="btn-itemDelete" onClick={()=> this.props.removeNote(id)}>Delete</Button> */}{note._id}
-
+                  <Button className="btn-itemDelete" onClick={()=> this.props.removeNote(note._id)}>Delete-A</Button>
+                  <h5>{note._id}</h5>
                 </li>
+// ☞ 04a1312d-1275-4a50-8c41-bf1867af6999
+
 
               )}
             </ul>
