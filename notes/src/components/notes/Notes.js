@@ -41,15 +41,15 @@ componentDidMount() {
 }
 
 
- deleteFunc (req, res) {
-    console.log(req.params.id);
-    Notes
-      .findByIdAndRemove(req.params.id)
-      .then(note => {
-        res.send('The note was deleted')
-      })
-      .catch(err => console.log(err));
-  };
+//  deleteFunc (req, res) {
+//     console.log(req.params.id);
+//     Notes
+//       .findByIdAndRemove(req.params.id)
+//       .then(note => {
+//         res.send('The note was deleted')
+//       })
+//       .catch(err => console.log(err));
+//   };
   
   removeNote(id) {
     this.setState({notes: this.state.notes.filter(note => note.id !== id)})
@@ -97,10 +97,11 @@ componentDidMount() {
                   <p></p>
                   <a href={note.urlAddress}>View product</a>  |
                   <a href={note.reviewURL}> Read reviews</a>  |
-                  <a href={note.audioFileURL}>  Play audio</a>
+                  <a href={note.audioFileURL}>  Play audio</a>  |
+                  <a href={note.gallery}>  Gallery</a>
                   {/* <button className="btn-itemDelete">X</button> */}
+                  <Button className="btn-itemDelete" onClick={()=> this.props.removeNote(id)}>Delete</Button>
                   {/* <Button className="btn-itemDelete" onClick={()=> this.props.removeNote(id)}>Delete</Button> */}
-                  <Button className="btn-itemDelete" onClick={()=> this.props.deleteFunc(id)}>Delete</Button>
 
                 </li>
 

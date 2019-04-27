@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const Schema = mongoose.Schema;
+const Schema = mongoose.Schema; // for REFACTOR rename to variable `Schema` to noteSchema`
 
 // currently duplicates model `ElectricUpright` for production refactor to pull import this ElectricUpright.  
 // REPLACE LINES 6-17 with `ElectricUpright`?
