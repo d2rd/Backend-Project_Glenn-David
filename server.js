@@ -103,6 +103,7 @@ server.post('/Notes/create', (req, res) => {
   const audioFileURL = req.body.audioFileURL;
   const timeStamp = new Date();
   const newNote = new NoteSchema({
+    _id: new mongoose.Types.ObjectId(),
     title: title,
     priority: priority,
     price: price,
@@ -114,11 +115,17 @@ server.post('/Notes/create', (req, res) => {
     createdOn: timeStamp,
   });
   newNote.save()
-  .then(response => res.send(`This note was added: ${response}`))
+  .then(response => res.status(201).json({message: `This note was added: ${response}`}))
   .catch(err => {
-    console.log(`There was an error: ${err}`);
-    res.send(`There was an error!`)
+    console.log(err);
+    res.status(500).json({
+      error: err
+      });
   })
+  // .catch(err => {
+  //   console.log(`There was an error: ${err}`);
+  //   res.send(`There was an error!`)
+  // })
 })
 // ☞ 43ae1050-8247-4911-97b8-9d10f644a290
 
@@ -148,6 +155,7 @@ server.put('/Notes/update/:id', (req, res) => {
     .catch(err => console.log(err))
 })
 
+// Partial updates of a document.
 // server.patch('/Notes/update/:id', (req, res) => {
 //   console.log(req.params.id)
 //   Note
@@ -158,6 +166,20 @@ server.put('/Notes/update/:id', (req, res) => {
 //     .catch(err => console.log(err))
 // })
 
+//delete handler for individual note documents
+server.delete("/notes/:id", (req, res) => {
+  const noteId = req.params.id;
+  NoteSchema.findByIdAndRemove(noteId)
+  .then(response => res.send(`This note was removed: ${response}`))
+  .catch(err => {
+    console.log(`There was an error deleting a note: ${err}`);
+    res.send(`There was an error deleting the note`);
+  })
+})
+
+
+// FAILED DELETE CODE
+/*
 server.delete('/Notes/delete/:id', deleteFunc) // request DELETE http://localhost:5501/Notes/delete/5c761df560483331e5272758
 
 function deleteFunc (req, res) {
@@ -170,6 +192,23 @@ function deleteFunc (req, res) {
     .catch(err => console.log(err));
 };
 
+// server.deleteNote("/:noteId", (req, res, next)
+// => {
+//   const id = req.params.noteId;
+//   Note.remove({_id: id})
+//   .exec()
+//   .then(result => {
+//     res.status(200).json(result);
+//   })
+//   .catch(err => {
+//     console.log(err);
+//     res.status(500).json({
+//       error: err
+//     });
+//   });
+// });
+
+*/
 server.listen(port, () => {
   console.log(`server listening on port ${port}`);
 });

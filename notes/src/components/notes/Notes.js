@@ -51,8 +51,8 @@ componentDidMount() {
 //       .catch(err => console.log(err));
 //   };
   
-  removeNote(id) {
-    this.setState({notes: this.state.notes.filter(note => note.id !== id)})
+  removeNote(_id) {
+    this.setState({notes: this.state.notes.filter(note => note._id !== _id)})
   }  //adapted from video https://youtu.be/KItsR6pM5lY
 
 
@@ -89,8 +89,8 @@ componentDidMount() {
           </div>
           <div className="Notes-panel">
             <ul>
-              {this.state.notes.map((note, id) =>
-                <li key={id}>
+              {this.state.notes.map((note, _id) =>
+                <li key={_id}>
                 <div className="Note-title-row"><h3 className="Title">{note.title}</h3><h3 className="Price">Price: ${note.price}</h3><h3 className="Priority">Priority: {note.priority}</h3>
                 </div>
                   {note.body}
@@ -99,9 +99,10 @@ componentDidMount() {
                   <a href={note.reviewURL}> Read reviews</a>  |
                   <a href={note.audioFileURL}>  Play audio</a>  |
                   <a href={note.gallery}>  Gallery</a>
+                  <p></p>
                   {/* <button className="btn-itemDelete">X</button> */}
-                  <Button className="btn-itemDelete" onClick={()=> this.props.removeNote(id)}>Delete</Button>
-                  {/* <Button className="btn-itemDelete" onClick={()=> this.props.removeNote(id)}>Delete</Button> */}
+                  <Button className="btn-itemDelete" onClick={()=> this.props.removeNote(note._id)}>Delete</Button>
+                  {/* <Button className="btn-itemDelete" onClick={()=> this.props.removeNote(id)}>Delete</Button> */}{note._id}
 
                 </li>
 

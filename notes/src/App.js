@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 // import logo from './logo.svg';
-import axios from 'axios';
+// import axios from 'axios';
 import logo from './assets/D2rdroid2.png';  //move to ./assets folder
 import './App.css';
 import Notes from './components/notes/Notes'

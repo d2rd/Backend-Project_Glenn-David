@@ -4,6 +4,7 @@ const Schema = mongoose.Schema; // for REFACTOR rename to variable `Schema` to n
 // currently duplicates model `ElectricUpright` for production refactor to pull import this ElectricUpright.  
 // REPLACE LINES 6-17 with `ElectricUpright`?
   const NoteSchema = new Schema({
+    _id: mongoose.Schema.Types.ObjectId,
     title: {
       type: String,
       required: true
