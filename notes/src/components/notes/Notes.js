@@ -55,7 +55,12 @@ componentDidMount() {
     this.setState({notes: this.state.notes.filter(note => note._id !== _id)})
   }  //adapted from video https://youtu.be/KItsR6pM5lY
 
-
+deleteNoteHandler = (noteIndex) => {
+  // console.log('deleteNoteHandler was clicked!');
+  const notes = this.state.notes;
+  notes.splice(noteIndex, 1);
+  this.setState({notes: notes})
+}
   render() {
     return (
       <div>
@@ -95,7 +100,8 @@ componentDidMount() {
                   <a href={note.audioFileURL}>  Play audio</a>  |
                   <a href={note.gallery}>  Gallery</a>
                   <p></p>
-                  <Button className="btn-itemDelete" onClick={()=> this.props.removeNote(note._id)}>Delete-A</Button>
+                  <button className="btn-itemDelete" onClick={this.deleteNoteHandler}>Delete Me</button>
+                  {/* <Button className="btn-itemDelete" onClick={()=> this.props.removeNote(note._id)}>Delete-A</Button> */}
                   <h5>{note._id}</h5>
                 </li>
 // ☞ 04a1312d-1275-4a50-8c41-bf1867af6999
