@@ -4,7 +4,7 @@ import React, { Component } from 'react';
 import logo from './assets/D2rdroid2.png';  //move to ./assets folder
 import './App.css';
 import Notes from './components/notes/Notes'
-import NoteForm from './components/notes/NOT-USED/NoteForm';
+// import NoteForm from './components/notes/NOT-USED/NoteForm';
 
 // from Reactstrap - 06-Buttons and onClick
 

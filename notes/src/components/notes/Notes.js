@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button } from 'reactstrap';
+// import { Button } from 'reactstrap';
 // import { Container, LGroup, ListGroupItem } from 'reactstrap';
 import './Notes.css';
 // import logo from '../src/assets/D2rdroid2.png';  //move to ./assets folder
@@ -55,12 +55,23 @@ componentDidMount() {
     this.setState({notes: this.state.notes.filter(note => note._id !== _id)})
   }  //adapted from video https://youtu.be/KItsR6pM5lY
 
-deleteNoteHandler = (noteIndex) => {
+// Delete user
+deleteNoteHandler1 = (noteIndex) => {
   // console.log('deleteNoteHandler was clicked!');
   const notes = this.state.notes;
   notes.splice(noteIndex, 1);
   this.setState({notes: notes})
 }
+deleteNoteHandler2 = (_id) => {
+  // console.log('deleteNoteHandler was clicked!');
+  console.log(_id)
+  fetch(url._id, { 
+    method: 'DELETE' 
+  }); 
+}
+
+
+
   render() {
     return (
       <div>
@@ -100,7 +111,7 @@ deleteNoteHandler = (noteIndex) => {
                   <a href={note.audioFileURL}>  Play audio</a>  |
                   <a href={note.gallery}>  Gallery</a>
                   <p></p>
-                  <button className="btn-itemDelete" onClick={this.deleteNoteHandler}>Delete Me</button>
+                  <button className="btn-itemDelete" onClick={this.deleteNoteHandler2}>Delete Me</button>
                   {/* <Button className="btn-itemDelete" onClick={()=> this.props.removeNote(note._id)}>Delete-A</Button> */}
                   <h5>{note._id}</h5>
                 </li>
