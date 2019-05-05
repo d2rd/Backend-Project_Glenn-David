@@ -168,7 +168,7 @@ server.put('/Notes/update/:id', (req, res) => {
 
 //delete handler for individual note documents
 server.delete("/notes/:id", (req, res) => {
-  const noteId = req.params.id;
+  const noteId = req.params._id;
   NoteSchema.findByIdAndRemove(noteId)
   .then(response => res.send(`This note was removed: ${response}`))
   .catch(err => {
