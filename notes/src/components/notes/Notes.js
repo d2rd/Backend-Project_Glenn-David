@@ -80,6 +80,11 @@ deleteNoteHandler2 = (_id) => {
 deleteNoteHandler3(note){
   // alert('deleteNoteHandler was clicked!');
   console.log(note._id, note.title);
+  fetch(url,note._id, { 
+    method: 'DELETE' 
+  }); 
+  console.log(note._id, note.title);
+  
 }
 
 
