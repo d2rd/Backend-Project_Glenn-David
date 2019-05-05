@@ -70,6 +70,18 @@ deleteNoteHandler2 = (_id) => {
   }); 
 }
 
+deleteNoteHandler2 = (_id) => {
+  // console.log('deleteNoteHandler was clicked!');
+  console.log(_id)
+  fetch(url._id, { 
+    method: 'DELETE' 
+  }); 
+}
+deleteNoteHandler3(note){
+  // alert('deleteNoteHandler was clicked!');
+  console.log(note._id, note.title);
+}
+
 
 
   render() {
@@ -111,7 +123,7 @@ deleteNoteHandler2 = (_id) => {
                   <a href={note.audioFileURL}>  Play audio</a>  |
                   <a href={note.gallery}>  Gallery</a>
                   <p></p>
-                  <button className="btn-itemDelete" onClick={this.deleteNoteHandler2}>Delete Me</button>
+                  <button className="btn-itemDelete" onClick={this.deleteNoteHandler3.bind(this,note)}>Delete Me</button>
                   {/* <Button className="btn-itemDelete" onClick={()=> this.props.removeNote(note._id)}>Delete-A</Button> */}
                   <h5>{note._id}</h5>
                 </li>
