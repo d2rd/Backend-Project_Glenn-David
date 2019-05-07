@@ -77,6 +77,7 @@ deleteNoteHandler2 = (_id) => {
     method: 'DELETE' 
   }); 
 }
+
 deleteNoteHandler3(note){
   // alert('deleteNoteHandler was clicked!');
   console.log(note._id, note.title);
@@ -84,8 +85,26 @@ deleteNoteHandler3(note){
     method: 'DELETE' 
   }); 
   console.log(note._id, note.title);
-  
 }
+
+deleteNoteHandler4(note){
+  // alert('deleteNoteHandler was clicked!');
+  console.log(note._id, note.title);
+  this.setState({notes: this.state.notes.filter(note => note._id !== note._id)})
+  console.log(note._id, note.title);  
+}
+
+// deleteNoteHandler5(note){
+//   // alert('deleteNoteHandler was clicked!');
+//   console.log(note._id, note.title);
+// Notes
+//       .findByIdAndRemove(note._id)
+//       .then(note => {
+//         res.send('The note was deleted')
+//       })
+//       .catch(err => console.log(err));
+// console.log(note._id, note.title);
+// }
 
 
 
@@ -128,7 +147,7 @@ deleteNoteHandler3(note){
                   <a href={note.audioFileURL}>  Play audio</a>  |
                   <a href={note.gallery}>  Gallery</a>
                   <p></p>
-                  <button className="btn-itemDelete" onClick={this.deleteNoteHandler3.bind(this,note)}>Delete Me</button>
+                  <button className="btn-itemDelete" onClick={this.deleteNoteHandler4.bind(this,note)}>Delete Me</button>
                   {/* <Button className="btn-itemDelete" onClick={()=> this.props.removeNote(note._id)}>Delete-A</Button> */}
                   <h5>{note._id}</h5>
                 </li>
