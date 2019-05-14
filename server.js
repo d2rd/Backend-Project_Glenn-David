@@ -5,7 +5,7 @@ const helmet = require('helmet');
 const mongoose = require('mongoose');
 const NoteSchema = require('./models/Note');
 
-// const Axios = require("axios"); ck #6 axios not needed in the backend delete this
+// const Axios = require("axios"); ck #6 axios not needed in the backend move this to Notes.js
 
 const cors = require('cors');
 // const bodyParser = require('body-parser'); express.json() built-in

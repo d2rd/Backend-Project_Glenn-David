@@ -1,7 +1,8 @@
+import './Notes.css';
 import React, { Component } from 'react';
+const Axios = require("axios");
 // import { Button } from 'reactstrap';
 // import { Container, LGroup, ListGroupItem } from 'reactstrap';
-import './Notes.css';
 // import logo from '../src/assets/D2rdroid2.png';  //move to ./assets folder
 const url = 'http://localhost:5501/notes'
 // const notes = 'http://localhost:5501/notes'
@@ -93,6 +94,8 @@ deleteNoteHandler4(note){
   this.setState({notes: this.state.notes.filter(note => note._id !== note._id)})
   console.log(note._id, note.title);  
 }
+
+// deleteNoteHandler5()
 
 // deleteNoteHandler5(note){
 //   // alert('deleteNoteHandler was clicked!');
