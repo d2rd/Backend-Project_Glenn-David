@@ -90,7 +90,7 @@ deleteNoteHandler3(note){
 deleteNoteHandler4(note){
   // alert('deleteNoteHandler was clicked!');
   console.log(note._id, note.title);
-  this.setState({notes: this.state.notes.filter(note => note._id !== note._id)})
+  this.setState({notes: this.state.notes.filter(note => note._id)})
   console.log(note._id, note.title);  
 }
 
