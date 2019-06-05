@@ -3,8 +3,8 @@ import React, { Component } from 'react';
 // import { Container, LGroup, ListGroupItem } from 'reactstrap';
 import './Notes.css';
 // import logo from '../src/assets/D2rdroid2.png';  //move to ./assets folder
-const url = 'http://localhost:5501/notes'
-// const notes = 'http://localhost:5501/notes'
+
+const serverURL = 'http://localhost:5501/notes'
 
 class Notes extends Component {
   constructor(props) {  //constructor initializes the default state.
@@ -27,7 +27,7 @@ class Notes extends Component {
 //   }
 
 callAPI () {
-  fetch(url) // Call the fetch function passing the url of the API as a parameter
+  fetch({serverURL}) // Call the fetch function passing the url of the API as a parameter
     .then(res => res.json())
     .then(notes => this.setState({notes}, () => console.log('Notes fetched...', notes)
       ))
@@ -38,19 +38,21 @@ callAPI () {
 
 componentDidMount() {
   this.callAPI();
-}
-
-
-//  deleteFunc (req, res) {
-//     console.log(req.params.id);
-//     Notes
-//       .findByIdAndRemove(req.params.id)
-//       .then(note => {
-//         res.send('The note was deleted')
-//       })
+  fetch.get('/', (req, res) => {
+    res.send('Hello from the d2rd Notes back-end express server using MongoDB on mLab'); // sanity check
+  });
+  
+  //  deleteFunc (req, res) {
+    //     console.log(req.params.id);
+    //     Notes
+    //       .findByIdAndRemove(req.params.id)
+    //       .then(note => {
+      //         res.send('The note was deleted')
+      //       })
 //       .catch(err => console.log(err));
 //   };
-  
+
+}
   removeNote(_id) {
     this.setState({notes: this.state.notes.filter(note => note._id !== _id)})
   }  //adapted from video https://youtu.be/KItsR6pM5lY
@@ -65,7 +67,7 @@ deleteNoteHandler1 = (noteIndex) => {
 deleteNoteHandler2 = (_id) => {
   // console.log('deleteNoteHandler was clicked!');
   console.log(_id)
-  fetch(url._id, { 
+  fetch(serverURL._id, { 
     method: 'DELETE' 
   }); 
 }
@@ -73,7 +75,7 @@ deleteNoteHandler2 = (_id) => {
 deleteNoteHandler2 = (_id) => {
   // console.log('deleteNoteHandler was clicked!');
   console.log(_id)
-  fetch(url._id, { 
+  fetch(serverURL._id, { 
     method: 'DELETE' 
   }); 
 }
@@ -81,7 +83,7 @@ deleteNoteHandler2 = (_id) => {
 deleteNoteHandler3(note){
   // alert('deleteNoteHandler was clicked!');
   console.log(note._id, note.title);
-  fetch(url,note._id, { 
+  fetch(serverURL,note._id, { 
     method: 'DELETE' 
   }); 
   console.log(note._id, note.title);
