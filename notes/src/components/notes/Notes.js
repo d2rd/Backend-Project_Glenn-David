@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 // import { Button } from 'reactstrap';
 // import { Container, LGroup, ListGroupItem } from 'reactstrap';
+import axios from 'axios';
 import './Notes.css';
 // import logo from '../src/assets/D2rdroid2.png';  //move to ./assets folder
 const url = 'http://localhost:5501/notes'
@@ -87,12 +88,12 @@ deleteNoteHandler3(note){
   console.log(note._id, note.title);
 }
 
-deleteNoteHandler4(note){
-  // alert('deleteNoteHandler was clicked!');
-  console.log(note._id, note.title);
-  this.setState({notes: this.state.notes.filter(note => note._id)})
-  console.log(note._id, note.title);  
-}
+// deleteNoteHandler4(note){
+//   // alert('deleteNoteHandler4 was clicked!');
+//   console.log(note._id, note.title);
+//   this.setState({notes: this.state.notes.filter(note => note._id)})
+//   console.log(note._id, note.title);  
+// }
 
 // deleteNoteHandler5(note){
 //   // alert('deleteNoteHandler was clicked!');
@@ -105,8 +106,26 @@ deleteNoteHandler4(note){
 //       .catch(err => console.log(err));
 // console.log(note._id, note.title);
 // }
+deleteNoteHandler6 = (note)=> {
+  // alert('deleteNoteHandler4 was clicked!');
+  console.log(note)
+  axios.delete(url)
+  .then(res => {
+    // this.setState({notes: notes.filter(note => note._id !== note._id)})
+    this.setState({notes: this.state.notes.filter(n => n._id !== note._id)})
+  })
+  .then(() => {console.log('The note was deleted')})
+  .catch(err => console.log(err));
+}
 
-
+deleteNoteHandler7 = _id => {
+  axios
+    .delete(`http://localhost:5501/notes/${_id}`)
+    .then(res => this.setState({ notes: res.data }))
+    .catch(err => {
+      console.log(err);
+    })
+}
 
   render() {
     return (
@@ -147,7 +166,7 @@ deleteNoteHandler4(note){
                   <a href={note.audioFileURL}>  Play audio</a>  |
                   <a href={note.gallery}>  Gallery</a>
                   <p></p>
-                  <button className="btn-itemDelete" onClick={this.deleteNoteHandler4.bind(this,note)}>Delete Me</button>
+                  <button className="btn-itemDelete" onClick={()=>this.deleteNoteHandler7(note)}>Delete Me</button>
                   {/* <Button className="btn-itemDelete" onClick={()=> this.props.removeNote(note._id)}>Delete-A</Button> */}
                   <h5>{note._id}</h5>
                 </li>
