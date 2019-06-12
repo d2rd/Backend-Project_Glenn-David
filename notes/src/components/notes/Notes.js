@@ -30,7 +30,7 @@ export default class Notes extends Component {
 //   }
 
 callAPI () {
-  axios.get({url}&&`/electricUprights`)// Call axios passing the url of the API as a parameter
+  axios.get(`${url}/electricUprights`)// Call axios passing the url of the API as a parameter
   .then(res => {
     const notes = res.data;
     this.setState({ notes }, () => console.log('Notes fetched...', notes)
