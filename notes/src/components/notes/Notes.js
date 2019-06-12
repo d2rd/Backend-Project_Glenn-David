@@ -1,12 +1,15 @@
 import React, { Component } from 'react';
+import axios from 'axios';
+
 // import { Button } from 'reactstrap';
 // import { Container, LGroup, ListGroupItem } from 'reactstrap';
 import './Notes.css';
 // import logo from '../src/assets/D2rdroid2.png';  //move to ./assets folder
+
 const url = 'http://localhost:5501/notes'
 // const notes = 'http://localhost:5501/notes'
 
-class Notes extends Component {
+export default class Notes extends Component {
   constructor(props) {  //constructor initializes the default state.
     super(props);
     this.state = {
@@ -27,13 +30,23 @@ class Notes extends Component {
 //   }
 
 callAPI () {
-  fetch(url) // Call the fetch function passing the url of the API as a parameter
-    .then(res => res.json())
-    .then(notes => this.setState({notes}, () => console.log('Notes fetched...', notes)
-      ))
-      .catch(error => {
-        console.error('Error fetching notes from mLab:', error); 
-      })
+  axios.get({url}&&`/electricUprights`)// Call axios passing the url of the API as a parameter
+  .then(res => {
+    const notes = res.data;
+    this.setState({ notes }, () => console.log('Notes fetched...', notes)
+    );
+  })
+  .catch(error => {
+          console.error('Error fetching notes from mLab:', error); 
+  })
+  // fetch(url) // Call the fetch function passing the url of the API as a parameter
+  //   .then(res => res.json())
+  //   .then(notes => this.setState({notes}, () => console.log('Notes fetched...', notes)
+  //     ))
+  //     .catch(error => {
+  //       console.error('Error fetching notes from mLab:', error); 
+  //     })
+
 }
 
 componentDidMount() {
@@ -136,24 +149,8 @@ deleteNoteHandler4(note){
           </div>
           <div className="Notes-panel">
             <ul>
-              {this.state.notes.map((note, _id) =>
-                <li key={_id}>
-                <div className="Note-title-row"><h3 className="Title">{note.title}</h3><h3 className="Price">Price: ${note.price}</h3><h3 className="Priority">Priority: {note.priority}</h3>
-                </div>
-                  {note.body}
-                  <p></p>
-                  <a href={note.urlAddress}>View product</a>  |
-                  <a href={note.reviewURL}> Read reviews</a>  |
-                  <a href={note.audioFileURL}>  Play audio</a>  |
-                  <a href={note.gallery}>  Gallery</a>
-                  <p></p>
-                  <button className="btn-itemDelete" onClick={this.deleteNoteHandler4.bind(this,note)}>Delete Me</button>
-                  {/* <Button className="btn-itemDelete" onClick={()=> this.props.removeNote(note._id)}>Delete-A</Button> */}
-                  <h5>{note._id}</h5>
-                </li>
-// ☞ 04a1312d-1275-4a50-8c41-bf1867af6999
-
-
+              { this.state.notes.map(Note => 
+              <li>{Note.title}</li>
               )}
             </ul>
           </div>
@@ -163,4 +160,4 @@ deleteNoteHandler4(note){
   }
 }
 
-export default Notes;
+// export default Notes; // export default used on line 13 - only one export allowed per module.
